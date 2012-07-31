@@ -58,7 +58,7 @@ if (ENVIRONMENT=="production") {
 	$db['default']['database'] = getenv('MYSQL_DB_NAME');
 	*/
 	
-	//App Fog setting
+	//App Fog settings
 	$services_json = json_decode(getenv("VCAP_SERVICES"),true);
 	$mysql_config = $services_json["mysql-5.1"][0]["credentials"];
 

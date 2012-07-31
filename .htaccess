@@ -1,0 +1,19 @@
+RewriteEngine on
+
+#next 2 lines commented out for local dev; enable on prod
+#Rewritecond %{HTTP_HOST} ^swap10\.com
+#RewriteRule ^(.*)$ http://www.swap10.com/$1 [R=301,L]
+
+# Customized error messages.
+ErrorDocument 404 /index.php
+
+# Set the default handler.
+DirectoryIndex index.php
+
+# Various rewrite rules.
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+</IfModule>

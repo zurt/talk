@@ -38,7 +38,9 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+//$route['group'] = "group";
+
+$route['default_controller'] = "talk";
 $route['404_override'] = '';
 
 

@@ -1,8 +1,8 @@
 <?
 /*
 
-Room creation script:
-CREATE TABLE  `talk`.`room` (
+--- Room creation script:
+CREATE TABLE  `room` (
 `id` INT( 16 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `uuid` VARCHAR( 32 ) NOT NULL ,
 `name` VARCHAR( 32 ) NOT NULL ,
@@ -12,8 +12,9 @@ INDEX (  `uuid` )
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 
-Post creation script:
-CREATE TABLE  `talk`.`post` (
+--- Post creation script:
+
+CREATE TABLE  `post` (
 `id` INT( 16 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `uuid` VARCHAR( 32 ) NOT NULL ,
 `author` INT( 16 ) NOT NULL ,
@@ -23,7 +24,7 @@ INDEX (  `uuid` ,  `author` )
 ) ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 
-Tank Auth scripts:
+--- Tank Auth scripts:
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
