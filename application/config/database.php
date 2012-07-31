@@ -52,7 +52,7 @@ if (ENVIRONMENT=="production") {
 
 	$db['default']['hostname'] = getenv('MYSQL_DB_HOST');
 	$db['default']['username'] = getenv('MYSQL_USERNAME');
-	$db['default']['password'] = getenv('MYSQL_PASSWORD'));
+	$db['default']['password'] = getenv('MYSQL_PASSWORD');
 	$db['default']['database'] = getenv('MYSQL_DB_NAME');
 	$db['default']['dbdriver'] = 'mysql';
 	$db['default']['dbprefix'] = '';
