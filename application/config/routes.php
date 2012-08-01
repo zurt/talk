@@ -38,9 +38,14 @@
 |
 */
 
-//$route['group'] = "group";
+$route['leaveGroup'] = "group/leaveGroup";
+$route['addGroup'] = "group/addGroup";
+$route['group/(:any)'] = "group/viewGroup/$1";
+$route['group/addPost'] = "post/addPost";
 
-$route['default_controller'] = "talk";
+$route['invite/(:any)'] = "invite/index/$1";
+
+$route['default_controller'] = "main";
 $route['404_override'] = '';
 
 
