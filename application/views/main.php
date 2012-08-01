@@ -9,9 +9,24 @@
 	<input type="submit" value="Submit" id="newgroup_Submit" class="btn">
 </form>
 
-<h3>Your groups</h3>
+<h3>Groups you belong to:</h3>
 <?
 //list groups
+foreach($groups as $group) {
+	echo $group->groupName . "<br>";
+}
 ?>
+
+<h3>Leave a group</h3>
+<form action="/group/leaveGroup" method="post">
+<?
+//list groups
+foreach($groups as $group) {
+	echo '<input type="radio" name="groupUuid" value="' . $group->groupUuid . '">';
+	echo $group->groupName . "<br>";
+}
+?>
+	<input type="submit" value="Submit" id="newgroup_Submit" class="btn">
+</form>
 
 <h3>Close a group</h3>

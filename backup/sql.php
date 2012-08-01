@@ -6,7 +6,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 31, 2012 at 04:07 PM
+-- Generation Time: Jul 31, 2012 at 05:41 PM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.6
 
@@ -32,11 +32,6 @@ CREATE TABLE `ci_sessions` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `ci_sessions`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -53,8 +48,7 @@ CREATE TABLE `group` (
   `active` int(4) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `uuid` (`groupUuid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -71,10 +65,19 @@ CREATE TABLE `login_attempts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `login_attempts`
+-- Table structure for table `member`
 --
 
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member` (
+  `groupId` int(16) NOT NULL,
+  `userId` int(16) NOT NULL,
+  `active` int(4) NOT NULL,
+  KEY `groupId` (`groupId`,`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -92,11 +95,6 @@ CREATE TABLE `post` (
   PRIMARY KEY (`id`),
   KEY `uuid` (`uuid`,`author`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `post`
---
-
 
 -- --------------------------------------------------------
 
@@ -124,12 +122,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` VALUES(2, 'tripp', '$P$BeNa9BrD2.fDvg2ShmUiDGJqCkmF7y/', 'trippp@gmail.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '::1', '2012-07-31 15:06:07', '2012-07-31 22:03:01', '2012-07-31 15:06:07');
-
 -- --------------------------------------------------------
 
 --
@@ -146,11 +138,6 @@ CREATE TABLE `user_autologin` (
   PRIMARY KEY (`key_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `user_autologin`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -166,9 +153,20 @@ CREATE TABLE `user_profiles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
+
+
+
+
+-- ---------------------------------------------------------
+-- DATA
+-- ---------------------------------------------------------
+
 --
--- Dumping data for table `user_profiles`
+-- Dumping data for table `users`
 --
+
+INSERT INTO `users` VALUES(2, 'tripp', '$P$BeNa9BrD2.fDvg2ShmUiDGJqCkmF7y/', 'trippp@gmail.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '::1', '2012-07-31 15:06:07', '2012-07-31 22:03:01', '2012-07-31 15:06:07');
+
 
 
 

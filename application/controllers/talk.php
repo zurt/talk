@@ -6,6 +6,8 @@ class Talk extends CI_Controller
 	{
 		parent::__construct();
 
+		$this->load->model('group_model');
+
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
 	}
@@ -15,8 +17,10 @@ class Talk extends CI_Controller
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/auth/login/');
 		} else {
-			$data['user_id']	= $this->tank_auth->get_user_id();
-			$data['username']	= $this->tank_auth->get_username();
+			$data['user_id'] = $this->tank_auth->get_user_id();
+			$data['username'] = $this->tank_auth->get_username();
+			
+			$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
 			
 			$this->load->view('templates/header', $data);
 			$this->load->view('main', $data);
