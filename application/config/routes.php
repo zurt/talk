@@ -45,7 +45,7 @@ $route['group/addPost'] = "post/addPost";
 
 $route['invite/(:any)'] = "invite/index/$1";
 
-$route['default_controller'] = "talk";
+$route['default_controller'] = "main";
 $route['404_override'] = '';
 
 

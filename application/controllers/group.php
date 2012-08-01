@@ -65,7 +65,7 @@ class Group extends CI_Controller
 				$data['posts'] = $this->post_model->get_posts($groupUuid);
 				
 				//spit it out
-				$this->load->view('templates/header', $data);
+				$this->load->view('templates/header2', $data);
 				$this->load->view('group', $data);
 				$this->load->view('templates/footer', $data);
 			}

@@ -1,6 +1,5 @@
 
-<p>Hi, <strong><?php echo $username; ?></strong>! <?php echo anchor('/auth/logout/', 'Logout'); ?></p>
-<p><a href="/">Main page</a></p>
+<br><br>
 
 
 <h3>Posts:</h3>

@@ -35,3 +35,28 @@ ERROR - 2012-08-01 15:04:09 --> Query error: Unknown column 'group' in 'where cl
 ERROR - 2012-08-01 15:04:09 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Users/trippp/Documents/00_mamp/htdocs/talk/system/core/Exceptions.php:185) /Users/trippp/Documents/00_mamp/htdocs/talk/system/core/Common.php 442
 ERROR - 2012-08-01 15:10:35 --> Severity: Notice  --> Undefined index: groupUuid /Users/trippp/Documents/00_mamp/htdocs/talk/application/models/group_model.php 19
 ERROR - 2012-08-01 15:10:35 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /Users/trippp/Documents/00_mamp/htdocs/talk/system/core/Exceptions.php:185) /Users/trippp/Documents/00_mamp/htdocs/talk/system/helpers/url_helper.php 542
+ERROR - 2012-08-01 16:16:23 --> 404 Page Not Found --> main/index
+ERROR - 2012-08-01 16:16:24 --> 404 Page Not Found --> main/index
+ERROR - 2012-08-01 16:16:25 --> 404 Page Not Found --> main/index
+ERROR - 2012-08-01 16:16:25 --> 404 Page Not Found --> main/index
+ERROR - 2012-08-01 16:16:37 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:16:37 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:16:37 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:17:42 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:17:42 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:17:42 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:01 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:01 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:01 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:31 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:31 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:31 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:34 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:34 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:34 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:45 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:45 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:18:45 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:19:03 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:19:03 --> 404 Page Not Found --> assets
+ERROR - 2012-08-01 16:19:03 --> 404 Page Not Found --> assets

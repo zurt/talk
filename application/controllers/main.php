@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Talk extends CI_Controller
+class Main extends CI_Controller
 {
 	function __construct()
 	{
@@ -22,7 +22,7 @@ class Talk extends CI_Controller
 			
 			$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
 			
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/header2', $data);
 			$this->load->view('main', $data);
 			$this->load->view('templates/footer', $data);
 		}

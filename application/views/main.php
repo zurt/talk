@@ -1,5 +1,5 @@
 
-<p>Hi, <strong><?php echo $username; ?></strong>! You are logged in now. <?php echo anchor('/auth/logout/', 'Logout'); ?></p>
+<br><br>
 
 <h3>Join a Group</h3>
 <form action="/invite" method="post">
