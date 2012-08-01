@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title><?if (!isset($pageTitle)){ echo "Right Blank";}
+		<title><?if (!isset($pageTitle)){ echo "Talk is Cheap";}
 		   else {echo $pageTitle;}?></title>
 		<!-- http://ogp.me/ -->
-		<meta property="og:title" content="<?if (!isset($pageTitle)){ echo "Right Blank";}
+		<meta property="og:title" content="<?if (!isset($pageTitle)){ echo "Talk is Cheap";}
 		   else {echo $pageTitle;}?>">
 		<? if (isset($listPage)) { ?>
 		<meta property="og:description" content="<? print_r($lists[0]->share); ?>">
