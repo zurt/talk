@@ -25,7 +25,7 @@ foreach($groups as $group) {
 	if ($group->memberCount != 1) {
 		echo "s";
 	}
-	echo ") (Invite link: /invite/" . $group->inviteUuid;
+	echo ") (Invite code: " . $group->inviteUuid;
 	echo ")<br>";
 }?>
 
