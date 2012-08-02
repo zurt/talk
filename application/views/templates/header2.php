@@ -8,7 +8,7 @@
 		<!-- http://ogp.me/ -->
 		<meta property="og:title" content="<?if (!isset($pageTitle)){ echo "Cheep";}
 		   else {echo $pageTitle;}?>">
-		<? if (isset($listPage)) { ?>
+		<!--<? if (isset($listPage)) { ?>
 		<meta property="og:description" content="<? print_r($lists[0]->share); ?>">
 		<? } else { ?>
 		<meta property="og:description" content="Play a hilariously crude fill in the blank game with your friends">
@@ -18,7 +18,7 @@
 		<meta property="og:url" content="http://<? echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>" />
 		<meta property="og:site_name" content="rightblank" />
 		<meta property="fb:admins" content="706441393" />
-
+		-->
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="HandheldFriendly" content="True">
@@ -30,11 +30,11 @@
 		<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-responsive.css">
 		
-		<link rel="stylesheet" href="/assets/css/friend_selector/tdfriendselector.css" />
+		<!--<link rel="stylesheet" href="/assets/css/friend_selector/tdfriendselector.css" />-->
 <? /*		
 		<link rel="stylesheet" type="text/css" href="/assets/css/jq-ui/jquery.ui.all.css">
 */ ?>
-		<link rel="stylesheet" type="text/css" href="/assets/css/mvp.css">
+		<!--<link rel="stylesheet" type="text/css" href="/assets/css/mvp.css">-->
 		<!-- Favicon and touch icons -->
 		<link rel="shortcut icon" href="/assets/ico/favicon.ico">
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png">
@@ -42,7 +42,7 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
 		
-		<script type="text/javascript" src="/assets/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.js"></script>
 	</head>
 	<body id="top">
 	
