@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title><?if (!isset($pageTitle)){ echo "Talk is Cheap";}
+		<title><?if (!isset($pageTitle)){ echo "Cheep";}
 		   else {echo $pageTitle;}?></title>
 		<!-- http://ogp.me/ -->
-		<meta property="og:title" content="<?if (!isset($pageTitle)){ echo "Talk is Cheap";}
+		<meta property="og:title" content="<?if (!isset($pageTitle)){ echo "Cheep";}
 		   else {echo $pageTitle;}?>">
 		<? if (isset($listPage)) { ?>
 		<meta property="og:description" content="<? print_r($lists[0]->share); ?>">
@@ -56,7 +56,7 @@
 						<span class="icon-bar"></span>
 					</a>
 					<!-- Be sure to leave the brand out there if you want it shown -->
-					<a class="brand" href="/">Talk is Cheap</a>
+					<a class="brand" href="/">Cheep</a>
 				
 					<!-- Everything you want hidden at 940px or less, place within here -->
 					<div class="nav-collapse">
