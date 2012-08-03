@@ -3,20 +3,20 @@
 
 /*
 TO-DO
+- limit number of users in a group
 - add a few layout tweaks to the 2 main pages
 
 - filter input boxes to avoid badness/hacking
-- limit number of users in a group
 - explore other words for 'group' and 'post' (I'm partial to 'clan' at the moment; it has a nice double connotation with both online and meat space.)
-- track 'viewed' messages per user
-- scroll to last viewed message on a page
-- think about rss feeds for groups (with security somehow)
-- daily digests
-- realtime messages
-- presence in some fashion (maybe not a 'this person is online', but perhaps a 'someone is entering a response' ala imessage)
 - get a domain
 - set up analytics
 - make an admin page / panel
+- daily digests
+- track 'viewed' messages per user
+- scroll to last viewed message on a page
+- think about rss feeds for groups (with security somehow)
+- realtime messaging / don't force a refresh
+- presence in some fashion (maybe not a 'this person is online', but perhaps a 'someone is entering a response' ala imessage)
 - encrypt group names, not just posts
 - explore group 'topic' header
 - explore prompts a little
@@ -57,6 +57,7 @@ class Group extends CI_Controller
 			$updateData['groupUuid'] = uniqid();
 			$updateData['active'] = 1;
 			$updateData['memberCount'] = 1;
+			$updateData['dateCreated'] = date('Y-m-d H:i:s');
 			$updateData['inviteUuid'] = sha1(uniqid());
 		
 			$groupUuid = $this->group_model->add_group($updateData);
@@ -65,6 +66,7 @@ class Group extends CI_Controller
 			$updateData=array();
 			$updateData['groupUuid'] = $groupUuid;
 			$updateData['userId'] = $userId;
+			$updateData['dateJoined'] = date('Y-m-d H:i:s');
 			$updateData['active'] = 1;
 			$data['newGroup'] = $this->group_model->add_member($updateData);
 		}
@@ -96,8 +98,10 @@ class Group extends CI_Controller
 			if ($groupUuid != 0) {
 				$data['user_id'] = $this->tank_auth->get_user_id();
 				$data['username'] = $this->tank_auth->get_username();
-				$data['groupUuid'] = $groupUuid;
+				//$data['groupUuid'] = $groupUuid;
 
+				$data['group'] = $this->group_model->get_group_info($groupUuid);
+				
 				//get user info
 				$data['user'] = $this->users->get_user_by_id($data['user_id'], 1);
 
@@ -118,6 +122,7 @@ class Group extends CI_Controller
 				$data['members'] = $this->group_model->get_members($groupUuid);
 				foreach($data['members'] as $member) {
 					$member->image = $this->gravatar->buildGravatarURL($member->email);
+					$member->dateJoined = relative_time($member->dateJoined);
 				}
 				
 				//spit it out

@@ -23,26 +23,33 @@ class Invite extends CI_Controller
 				$inviteUuid =  $this->input->post('inviteUuid');
 			}
 			if ($inviteUuid != "0") {
-				//error_log($inviteUuid);
+				
 				$groupUuid = $this->invite_model->get_invite($inviteUuid);
 				
 				//if the group is active, then the member can join
 				if($this->group_model->is_group_active($groupUuid) == 1) {
-					//then join the member
-					$updateData['groupUuid'] = $groupUuid;
-					$updateData['userId'] = $this->tank_auth->get_user_id();
-					$updateData['active'] = 1;
-			
-					$count = $this->group_model->is_member_of_group($updateData);
-					//error_log($count);
-					if($count == 0) {
-						$data['newGroup'] = $this->group_model->add_member($updateData);
-						$this->group_model->increase_member_count($updateData);
-					}
 					
-					//then redirect them to the group page
-					redirect('/group/' . $groupUuid);
-				}
+					//if the group has less than 8 people, then the member can join
+					if($thid->group_model->get_member_count($groupUuid) < 8) {
+						//then join the member
+						$updateData['groupUuid'] = $groupUuid;
+						$updateData['userId'] = $this->tank_auth->get_user_id();
+						$updateData['active'] = 1;
+			
+						$count = $this->group_model->is_member_of_group($updateData);
+						//error_log($count);
+						if($count == 0) {
+							$data['newGroup'] = $this->group_model->add_member($updateData);
+							$this->group_model->increase_member_count($updateData);
+						}
+					
+						//then redirect them to the group page
+						redirect('/group/' . $groupUuid);
+					}
+					else {
+						$message = "Group is full";
+						$this->session->set_flashdata('message', $message);
+					}
 				else {
 					$message = "Group is no longer active";
 					$this->session->set_flashdata('message', $message);

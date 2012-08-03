@@ -57,7 +57,11 @@
 					</a>
 					<!-- Be sure to leave the brand out there if you want it shown -->
 					<a class="brand" href="/">Cheep</a>
-				
+					<?
+					if (isset($group->groupName)) {
+						echo "<span class=\"brand\"> : " . $group->groupName . "</span>";
+					}
+					?>
 					<!-- Everything you want hidden at 940px or less, place within here -->
 					<div class="nav-collapse">
 					<!-- .nav, .navbar-search, .navbar-form, etc -->
@@ -76,9 +80,9 @@
 							<? } else { ?>
 								<li><a href="/auth/login">Log in</a></li>
 							<? } ?>
-							<? if(isset($user) && $user->group == 1) { ?>
+							<!--<? if(isset($user) && $user->group == 1) { ?>
 								<li><a href="/admin/">Admin</a></li>
-							<? } ?>
+							<? } ?>-->
 						</ul>
 					</div>
 				</div>

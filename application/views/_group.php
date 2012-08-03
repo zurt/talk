@@ -16,10 +16,19 @@ foreach($posts as $post) { ?>
 </div>
 <? } ?>
 
-<h3>Post</h3>
+
+<?
+if (count($posts)==0) {
+	echo "<h3>First Post!</h3>";
+}
+else {
+	echo "<h3>Post</h3>";
+}
+?>
 <form action="/group/addPost" method="post">
 	<textarea name="post"></textarea>
-	<input type="hidden" name="groupUuid" value="<? echo $groupUuid; ?>">
+	<input type="hidden" name="groupUuid" value="<? echo $group->groupUuid; ?>">
+	<br>
 	<input type="submit" value="Submit" id="newgroup_Submit" class="btn">
 </form>
 </div>
@@ -30,7 +39,10 @@ foreach($posts as $post) { ?>
 <h3>Members</h3>
 <?
 foreach($members as $member) {
-	echo $member->username . "<br>";
+	echo "<div>";
+	echo "<img src=\"" . $member->image . "\">";
+	echo " " . $member->username . ", joined " . $member->dateJoined;
+	echo "</div>";
 }
 ?>
 </div></div>

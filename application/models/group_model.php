@@ -7,9 +7,7 @@ class Group_model extends CI_Model {
 	
 	
 	public function add_group($data) {
-		//requires: uniqId, userId, comment
-		
-		$data['dateCreated'] = date('Y-m-d H:i:s');
+		//requires: uniqId, userId, comment, date
 		$this->db->insert('group', $data);
 		return ($data['groupUuid']);	
 	}
@@ -18,6 +16,15 @@ class Group_model extends CI_Model {
 		$this->db->where("groupUuid", $data['groupUuid']);
 		$this->db->set($updateData);
 		$this->db->update("group");
+	}
+	
+	public function get_group_info($groupUuid) {
+		$this->db->select("*");
+		$this->db->where("groupUuid", $groupUuid);
+		$this->db->from("group");
+		$query = $this->db->get();
+		error_log($this->db->last_query());
+		return $query->row();	
 	}
 	
 	public function is_group_active($groupUuid) {
@@ -93,7 +100,7 @@ class Group_model extends CI_Model {
 	}
 	
 	public function get_members($groupUuid) {
-		$this->db->select("username, email, m.userId");
+		$this->db->select("username, email, dateJoined, m.userId");
 		$this->db->from("member as m");
 		$this->db->join("users", "m.userId=users.id");
 		$this->db->join("group", "m.groupUuid=group.groupUuid");
