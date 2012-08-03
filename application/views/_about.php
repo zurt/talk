@@ -20,6 +20,9 @@
 <h2>I've been given an invite code and I don't know what to do</h2>
 <p>You'll need to join Cheep and then enter the invite code.  This will put you right into the group your friend has invited you to!</p>
 
+<h2>How do I get a profile picture?</h2>
+<p>Go to <a href="http://gravatar.com">gravatar.com</a> and register your email with them and upload a photo.  The good news is that there are many sites on the Internet that use Gravatar, so doing this once will could give you a nice icon on many sites (including Wordpress and others).</p>
+
 <h2>I want something Cheep doesn't have yet!</h2>
 <p>The roadmap for Cheep has a lot of exciting things in store for it.  We're building as quickly as we can, but we'd love to hear what you can't live without so we can make Cheep as useful as possible to you.</p>
 <p>Some of the things we plan on adding include: email notifications, sharable groups, more control over the invite codes and a bunch of other stuff!</p>
