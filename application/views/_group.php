@@ -39,7 +39,7 @@ else {
 <h3>Members</h3>
 <?
 foreach($members as $member) {
-	echo "<div>";
+	echo "<div class=\"memberListItem\">";
 	echo "<img src=\"" . $member->image . "\">";
 	echo " " . $member->username . ", joined " . $member->dateJoined;
 	echo "</div>";

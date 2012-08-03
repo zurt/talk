@@ -23,7 +23,7 @@ class Group_model extends CI_Model {
 		$this->db->where("groupUuid", $groupUuid);
 		$this->db->from("group");
 		$query = $this->db->get();
-		error_log($this->db->last_query());
+		//error_log($this->db->last_query());
 		return $query->row();	
 	}
 	
@@ -56,7 +56,7 @@ class Group_model extends CI_Model {
 		$this->db->where("groupUuid", $data['groupUuid']);
 		$this->db->set("memberCount", "memberCount-1", FALSE);
 		$this->db->update("group");
-		error_log($this->db->last_query());	
+		//error_log($this->db->last_query());	
 	}
 	
 
@@ -105,6 +105,7 @@ class Group_model extends CI_Model {
 		$this->db->join("users", "m.userId=users.id");
 		$this->db->join("group", "m.groupUuid=group.groupUuid");
 		$this->db->where("m.active", 1);
+		$this->db->where("m.groupUuid", $groupUuid);
 		//$this->db->order_by("date", "DESC");
 		
 		$query = $this->db->get();

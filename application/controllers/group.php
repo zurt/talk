@@ -3,10 +3,9 @@
 
 /*
 TO-DO
-- limit number of users in a group
 - add a few layout tweaks to the 2 main pages
-
 - filter input boxes to avoid badness/hacking
+
 - explore other words for 'group' and 'post' (I'm partial to 'clan' at the moment; it has a nice double connotation with both online and meat space.)
 - get a domain
 - set up analytics
@@ -37,6 +36,9 @@ class Group extends CI_Controller
 
 		$this->load->helper('url');
 		$this->load->helper('date');
+		$this->load->helper('strip_html_tags');
+		
+		$this->load->library('form_validation');
 		
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
@@ -50,25 +52,30 @@ class Group extends CI_Controller
 	}//of index
 	
 	function addGroup() {
-		if ($this->tank_auth->is_logged_in()) {
-			$updateData['creatorId'] = $userId = $this->tank_auth->get_user_id();		
+		if ($this->tank_auth->is_logged_in()) {		
 			//grab the name of the group and then add it to the db
-			$updateData['groupName'] = $this->input->post('groupname');
-			$updateData['groupUuid'] = uniqid();
-			$updateData['active'] = 1;
-			$updateData['memberCount'] = 1;
-			$updateData['dateCreated'] = date('Y-m-d H:i:s');
-			$updateData['inviteUuid'] = sha1(uniqid());
+			$this->form_validation->set_rules('groupname', 'required|trim|xss_clean|strip_tags');
+			
+			if ($this->form_validation->run() == TRUE) {
+				$updateData['groupName'] = strip_html_tags($this->input->post('groupname'));
+				$updateData['creatorId'] = $userId = $this->tank_auth->get_user_id();
+				//$updateData['groupName'] = $this->input->post('groupname');
+				$updateData['groupUuid'] = uniqid();
+				$updateData['active'] = 1;
+				$updateData['memberCount'] = 1;
+				$updateData['dateCreated'] = date('Y-m-d H:i:s');
+				$updateData['inviteUuid'] = sha1(uniqid());
 		
-			$groupUuid = $this->group_model->add_group($updateData);
-			error_log($groupUuid);
-			//now add the user to the group
-			$updateData=array();
-			$updateData['groupUuid'] = $groupUuid;
-			$updateData['userId'] = $userId;
-			$updateData['dateJoined'] = date('Y-m-d H:i:s');
-			$updateData['active'] = 1;
-			$data['newGroup'] = $this->group_model->add_member($updateData);
+				$groupUuid = $this->group_model->add_group($updateData);
+				error_log($groupUuid);
+				//now add the user to the group
+				$updateData=array();
+				$updateData['groupUuid'] = $groupUuid;
+				$updateData['userId'] = $userId;
+				$updateData['dateJoined'] = date('Y-m-d H:i:s');
+				$updateData['active'] = 1;
+				$data['newGroup'] = $this->group_model->add_member($updateData);
+			}
 		}
 		redirect('/');
 	}

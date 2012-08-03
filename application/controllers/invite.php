@@ -28,13 +28,13 @@ class Invite extends CI_Controller
 				
 				//if the group is active, then the member can join
 				if($this->group_model->is_group_active($groupUuid) == 1) {
-					
 					//if the group has less than 8 people, then the member can join
-					if($thid->group_model->get_member_count($groupUuid) < 8) {
+					if($this->group_model->get_member_count($groupUuid) < 8) {
 						//then join the member
 						$updateData['groupUuid'] = $groupUuid;
 						$updateData['userId'] = $this->tank_auth->get_user_id();
 						$updateData['active'] = 1;
+						$updateData['dateJoined'] = date('Y-m-d H:i:s');
 			
 						$count = $this->group_model->is_member_of_group($updateData);
 						//error_log($count);
@@ -50,11 +50,11 @@ class Invite extends CI_Controller
 						$message = "Group is full";
 						$this->session->set_flashdata('message', $message);
 					}
+				}
 				else {
 					$message = "Group is no longer active";
 					$this->session->set_flashdata('message', $message);
-				}
-				
+				}	
 			}
 			redirect("/");
 		}

@@ -49,6 +49,6 @@ a:visited {
 	margin-top: -9px;
 }
 
-#leaveGroup_Submit {
+#leaveGroup_Submit, .memberListItem {
 	margin-top: 10px;
 }

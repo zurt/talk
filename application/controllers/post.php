@@ -9,8 +9,10 @@ class Post extends CI_Controller
 		$this->load->model('post_model');
 
 		$this->load->helper('url');
-		$this->load->library('tank_auth');
+		$this->load->helper('strip_html_tags');
+		$this->load->helper('close_tags');
 		
+		$this->load->library('tank_auth');
 		$this->load->library('encrypter');
 	}
 
@@ -25,9 +27,14 @@ class Post extends CI_Controller
 			$updateData['groupUuid'] = $this->input->post('groupUuid');
 			$updateData['postUuid'] = uniqid();
 			//$updateData['content'] = $this->input->post('post');
-			$updateData['content'] = $this->encrypter->encryptData($this->input->post('post'));
-		
-			$postUuid = $this->post_model->add_post($updateData);
+			
+			$post = strip_html_tags($this->input->post('post'), 'img|b|i|strong');
+			$post = close_tags($post);
+			error_log($post);
+			if ($post != "") {
+				$updateData['content'] = $this->encrypter->encryptData($post);
+				$postUuid = $this->post_model->add_post($updateData);
+			}
 			redirect('/group/' . $updateData['groupUuid']);
 		}
 	}//of addPost
