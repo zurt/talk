@@ -14,6 +14,9 @@
 	<li>The last person to leave the group "turns off the lights."  We delete the data in the group which is about as private as we can make it on our end.</li>
 </ul>
 
+<h2>How do I invite people to join me?</h2>
+<p>Share the invite code.  That's it.  They'll need to sign up, of course, but you can share it however you desire.  And since it isn't tied to their email address, they can register whatever email they want with the site.  Everyone wins!</p>
+
 <h2>I've been given an invite code and I don't know what to do</h2>
 <p>You'll need to join Cheep and then enter the invite code.  This will put you right into the group your friend has invited you to!</p>
 
