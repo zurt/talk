@@ -16,9 +16,13 @@
 
 <h2>How do I invite people to join me?</h2>
 <p>Share the invite code.  That's it.  They'll need to sign up, of course, but you can share it however you desire.  And since it isn't tied to their email address, they can register whatever email they want with the site.  Everyone wins!</p>
+<p>Do note that everyone in the group has the invite code and can invite others to join.</p>
 
 <h2>I've been given an invite code and I don't know what to do</h2>
 <p>You'll need to join Cheep and then enter the invite code.  This will put you right into the group your friend has invited you to!</p>
+
+<h2>I want to insert a picture</h2>
+<p>Right now, we support 4 HTML tags: img, b (or strong) and i.  If you want to include a picture, you'll need the URL for it.  Type in &lt;img src="[URL goes here, minus the brackets]"&gt; in your post and the image should appear.</p>
 
 <h2>How do I get a profile picture?</h2>
 <p>Go to <a href="http://gravatar.com">gravatar.com</a> and register your email with them and upload a photo.  The good news is that there are many sites on the Internet that use Gravatar, so doing this once will could give you a nice icon on many sites (including Wordpress and others).</p>

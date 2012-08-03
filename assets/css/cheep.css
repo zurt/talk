@@ -52,3 +52,8 @@ a:visited {
 #leaveGroup_Submit, .memberListItem {
 	margin-top: 10px;
 }
+
+.postContent img {
+	display: block;
+	margin-bottom: 10px;
+}
