@@ -14,8 +14,7 @@ class Main extends CI_Controller
 		$this->load->library('gravatar');
 	}
 
-	function index()
-	{
+	public function index() {
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/auth/login/');
 		} else {
@@ -33,6 +32,18 @@ class Main extends CI_Controller
 			$this->load->view('_main', $data);
 			$this->load->view('templates/footer', $data);
 		}
+	}//of index
+	
+	public function about() {
+		$data['user_id'] = $this->tank_auth->get_user_id();
+		$data['username'] = $this->tank_auth->get_username();
+		
+		//get user info
+		$data['user'] = $this->users->get_user_by_id($data['user_id'], 1);
+		
+		$this->load->view('templates/header2', $data);
+		$this->load->view('_about', $data);
+		$this->load->view('templates/footer', $data);		
 	}
 }
 

@@ -68,8 +68,8 @@
 							<!--<? if (isset($user->email) && $user->email != "") { ?>
 								<li><a href="/user" id="loggedInUser"><? echo $user->username; ?></a></li>
 							<? } ?>-->
-							<!--<li><a href="/about">About</a></li>
-							<li><a href="http://blog.rightblank.com">Blog</a></li>
+							<li><a href="/about">About</a></li>
+							<!--<li><a href="http://blog.rightblank.com">Blog</a></li>
 							<li><a data-toggle="modal" href="#feedbackModal" >Feedback</a></li>-->
 							<? if (isset($user->email) && $user->email != "") { ?>
 								<li><a href="/auth/logout">Log out</a></li>
@@ -86,8 +86,8 @@
 		</div>
 		<div class="container">
 			<div id="content">
-				<!--<? if(($this->session->flashdata('message'))) { ?>
+				<? if(($this->session->flashdata('message'))) { ?>
 					<div class="alert alert-info" data-alert="alert" >
 						<p><? echo $this->session->flashdata('message'); ?></p>
 					</div>	
-				<? } ?>-->
+				<? } ?>

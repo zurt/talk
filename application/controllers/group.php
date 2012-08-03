@@ -3,9 +3,6 @@
 
 /*
 TO-DO
-
-- set groups as inactive when the last member leaves
-- set up an about page to explain what the service currently does
 - add a few layout tweaks to the 2 main pages
 
 - filter input boxes to avoid badness/hacking

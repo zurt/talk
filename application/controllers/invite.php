@@ -43,7 +43,10 @@ class Invite extends CI_Controller
 					//then redirect them to the group page
 					redirect('/group/' . $groupUuid);
 				}
-				
+				else {
+					$message = "Group is no longer active";
+					$this->session->set_flashdata('message', $message);
+				}
 				
 			}
 			redirect("/");
