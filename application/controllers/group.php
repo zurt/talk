@@ -4,7 +4,7 @@
 /*
 TO-DO
 - add a few layout tweaks to the 2 main pages
-- filter input boxes to avoid badness/hacking
+
 
 - explore other words for 'group' and 'post' (I'm partial to 'clan' at the moment; it has a nice double connotation with both online and meat space.)
 - get a domain

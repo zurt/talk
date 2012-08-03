@@ -26,7 +26,6 @@ class Post extends CI_Controller
 			//grab the name of the group and then add it to the db
 			$updateData['groupUuid'] = $this->input->post('groupUuid');
 			$updateData['postUuid'] = uniqid();
-			//$updateData['content'] = $this->input->post('post');
 			
 			$post = strip_html_tags($this->input->post('post'), 'img|b|i|strong');
 			$post = close_tags($post);
