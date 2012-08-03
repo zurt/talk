@@ -30,7 +30,7 @@ class Post extends CI_Controller
 			
 			$post = strip_html_tags($this->input->post('post'), 'img|b|i|strong');
 			$post = close_tags($post);
-			error_log($post);
+			//error_log($post);
 			if ($post != "") {
 				$updateData['content'] = $this->encrypter->encryptData($post);
 				$postUuid = $this->post_model->add_post($updateData);
