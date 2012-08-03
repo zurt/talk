@@ -18,6 +18,13 @@ class Group_model extends CI_Model {
 		$this->db->update("group");
 	}
 	
+	public function delete_group($data) {
+		$this->db->where("groupUuid", $data['groupUuid']);
+		$this->db->set("content", "");
+		$this->db->update("post");	
+		//error_log($this->db->last_query());	
+	}
+	
 	public function get_group_info($groupUuid) {
 		$this->db->select("*");
 		$this->db->where("groupUuid", $groupUuid);

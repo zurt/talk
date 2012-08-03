@@ -93,6 +93,7 @@ class Group extends CI_Controller
 			if($this->group_model->get_member_count($data['groupUuid']) == 0) {
 				$updateData['active']=0;
 				$this->group_model->update_group($data, $updateData);
+				$this->group_model->delete_group($data);
 			}
 		}
 		
@@ -117,6 +118,7 @@ class Group extends CI_Controller
 
 				for($i=0; $i < count($posts); $i++) {
 					$posts[$i]->content = $this->encrypter->decryptData($posts[$i]->content);
+					error_log($posts[$i]->content);
 				}
 				
 				$data['posts'] = $posts;

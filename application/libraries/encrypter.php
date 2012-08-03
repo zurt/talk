@@ -8,9 +8,9 @@ class Encrypter {
      * @return string The encyrypted data
      */
     public function encryptData($data) {
-        $ivSize = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+        $ivSize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
         $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
-        return mcrypt_encrypt(MCRYPT_BLOWFISH, "gw2iYt26Gw", trim($data), MCRYPT_MODE_ECB, $iv);
+        return mcrypt_encrypt(MCRYPT_RIJNDAEL_256, "gw2iYt26Gw", trim($data), MCRYPT_MODE_ECB, $iv);
     }
 
     /**
@@ -20,9 +20,9 @@ class Encrypter {
      * @return string The decyrypted data
      */
     public function decryptData($data) {
-	    $ivSize = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+	    $ivSize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
 	    $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
-        return mcrypt_decrypt(MCRYPT_BLOWFISH, "gw2iYt26Gw", trim($data), MCRYPT_MODE_ECB, $iv);
+        return mcrypt_decrypt(MCRYPT_RIJNDAEL_256, "gw2iYt26Gw", trim($data), MCRYPT_MODE_ECB, $iv);
     }
 
 }
