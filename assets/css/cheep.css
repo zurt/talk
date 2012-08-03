@@ -1,0 +1,38 @@
+/*
+colors:
+
+red-purple: C3176B
+red: EC3844
+orange: FC8821
+yellow: FFD900
+purple: 57026A
+
+*/
+
+a {
+	color: #C3176B;
+}
+
+a:hover {
+	color: #EC3844;
+}
+
+a:visited {
+	color: #FC8821;
+}
+
+#content {
+	margin-top: 70px;
+	
+}
+
+.postHeader{
+	height: 30px;
+}
+
+.postContent {
+	margin-left: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
+	border-left: 2px solid #57026A;
+}

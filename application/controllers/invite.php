@@ -12,6 +12,8 @@ class Invite extends CI_Controller
 
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
+		
+		$this->load->library('gravatar');
 	}
 
 	function index($inviteUuid = 0) {
@@ -20,23 +22,31 @@ class Invite extends CI_Controller
 			if ($inviteUuid==0) {
 				$inviteUuid =  $this->input->post('inviteUuid');
 			}
-			if ($inviteUuid != 0) {
-			
+			if ($inviteUuid != "0") {
+				error_log($inviteUuid);
 				$groupUuid = $this->invite_model->get_invite($inviteUuid);
+				
+				//if the group is active, then the member can join
+				if($this->group_model->is_group_active($groupUuid) == 1) {
+					//then join the member
+					$updateData['groupUuid'] = $groupUuid;
+					$updateData['userId'] = $this->tank_auth->get_user_id();
+					$updateData['active'] = 1;
 			
-				//then join the member
-				$updateData['groupUuid'] = $groupUuid;
-				$updateData['userId'] = $this->tank_auth->get_user_id();
-				$updateData['active'] = 1;
-				$data['newGroup'] = $this->group_model->add_member($updateData);
-				$this->group_model->increase_member_count($updateData);
-			
-				//then redirect them to the group page
-				redirect('/group/' . $groupUuid);
+					$count = $this->group_model->is_member_of_group($updateData);
+					error_log($count);
+					if($count == 0) {
+						$data['newGroup'] = $this->group_model->add_member($updateData);
+						$this->group_model->increase_member_count($updateData);
+					}
+					
+					//then redirect them to the group page
+					redirect('/group/' . $groupUuid);
+				}
+				
+				
 			}
-			else {
-				redirect("/");
-			}
+			redirect("/");
 		}
 		else {
 			//redirect for sign-up

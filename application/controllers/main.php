@@ -10,6 +10,8 @@ class Main extends CI_Controller
 
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
+		
+		$this->load->library('gravatar');
 	}
 
 	function index()
@@ -20,10 +22,15 @@ class Main extends CI_Controller
 			$data['user_id'] = $this->tank_auth->get_user_id();
 			$data['username'] = $this->tank_auth->get_username();
 			
+			//get user info
+			$data['user'] = $this->users->get_user_by_id($data['user_id'], 1);
+			
+			
+			//get groups
 			$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
 			
 			$this->load->view('templates/header2', $data);
-			$this->load->view('main', $data);
+			$this->load->view('_main', $data);
 			$this->load->view('templates/footer', $data);
 		}
 	}

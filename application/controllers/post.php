@@ -11,6 +11,8 @@ class Post extends CI_Controller
 
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
+		
+		$this->load->library('encrypt');
 	}
 
 	function index() {
@@ -23,7 +25,8 @@ class Post extends CI_Controller
 			//grab the name of the group and then add it to the db
 			$updateData['groupUuid'] = $this->input->post('groupUuid');
 			$updateData['postUuid'] = uniqid();
-			$updateData['content'] = $this->input->post('post');
+			//$updateData['content'] = $this->input->post('post');
+			$updateData['content'] = $this->encrypt->_encrypt($this->input->post('post'));
 		
 			$postUuid = $this->post_model->add_post($updateData);
 			redirect('/group/' . $updateData['groupUuid']);

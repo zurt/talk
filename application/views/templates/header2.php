@@ -34,7 +34,7 @@
 <? /*		
 		<link rel="stylesheet" type="text/css" href="/assets/css/jq-ui/jquery.ui.all.css">
 */ ?>
-		<!--<link rel="stylesheet" type="text/css" href="/assets/css/mvp.css">-->
+		<link rel="stylesheet" type="text/css" href="/assets/css/cheep.css">
 		<!-- Favicon and touch icons -->
 		<link rel="shortcut icon" href="/assets/ico/favicon.ico">
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png">
@@ -65,12 +65,12 @@
 							<li><a href="/new">+ New Game</a></li>
 						</ul>-->
 						<ul class="nav pull-right">
-							<? if (isset($user->email) && $user->email != "") { ?>
-								<li><a href="/user" id="loggedInUser"><? echo $user->preferredname; ?></a></li>
-							<? } ?>
-							<li><a href="/about">About</a></li>
+							<!--<? if (isset($user->email) && $user->email != "") { ?>
+								<li><a href="/user" id="loggedInUser"><? echo $user->username; ?></a></li>
+							<? } ?>-->
+							<!--<li><a href="/about">About</a></li>
 							<li><a href="http://blog.rightblank.com">Blog</a></li>
-							<li><a data-toggle="modal" href="#feedbackModal" >Feedback</a></li>
+							<li><a data-toggle="modal" href="#feedbackModal" >Feedback</a></li>-->
 							<? if (isset($user->email) && $user->email != "") { ?>
 								<li><a href="/auth/logout">Log out</a></li>
 							<? } else { ?>
@@ -86,8 +86,8 @@
 		</div>
 		<div class="container">
 			<div id="content">
-				<? if(($this->session->flashdata('message'))) { ?>
+				<!--<? if(($this->session->flashdata('message'))) { ?>
 					<div class="alert alert-info" data-alert="alert" >
 						<p><? echo $this->session->flashdata('message'); ?></p>
 					</div>	
-				<? } ?>
+				<? } ?>-->

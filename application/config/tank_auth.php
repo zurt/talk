@@ -7,8 +7,8 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['website_name'] = 'Your project';
-$config['webmaster_email'] = 'webmaster@your-site.com';
+$config['website_name'] = 'Cheep';
+$config['webmaster_email'] = 'trippp@gmail.com';
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ $config['login_attempt_expire'] = 60*60*24;
 |--------------------------------------------------------------------------
 */
 $config['autologin_cookie_name'] = 'autologin';
-$config['autologin_cookie_life'] = 60*60*24*31*2;
+$config['autologin_cookie_life'] = 60*60*24*31*24;
 
 /*
 |--------------------------------------------------------------------------
