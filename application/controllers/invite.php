@@ -23,7 +23,7 @@ class Invite extends CI_Controller
 				$inviteUuid =  $this->input->post('inviteUuid');
 			}
 			if ($inviteUuid != "0") {
-				error_log($inviteUuid);
+				//error_log($inviteUuid);
 				$groupUuid = $this->invite_model->get_invite($inviteUuid);
 				
 				//if the group is active, then the member can join
@@ -34,7 +34,7 @@ class Invite extends CI_Controller
 					$updateData['active'] = 1;
 			
 					$count = $this->group_model->is_member_of_group($updateData);
-					error_log($count);
+					//error_log($count);
 					if($count == 0) {
 						$data['newGroup'] = $this->group_model->add_member($updateData);
 						$this->group_model->increase_member_count($updateData);

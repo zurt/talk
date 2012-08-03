@@ -36,7 +36,7 @@ class Group_model extends CI_Model {
 		$this->db->where("groupUuid", $groupUuid);
 		$query = $this->db->get();
 		//error_log($this->db->last_query());
-		return $query->row();	
+		return $query->row('memberCount');
 	}
 	
 	public function increase_member_count($data) {

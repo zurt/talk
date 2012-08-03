@@ -1,5 +1,34 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+
+/*
+TO-DO
+
+- set groups as inactive when the last member leaves
+- set up an about page to explain what the service currently does
+- add a few layout tweaks to the 2 main pages
+
+- filter input boxes to avoid badness/hacking
+- limit number of users in a group
+- explore other words for 'group' and 'post' (I'm partial to 'clan' at the moment; it has a nice double connotation with both online and meat space.)
+- track 'viewed' messages per user
+- scroll to last viewed message on a page
+- think about rss feeds for groups (with security somehow)
+- daily digests
+- realtime messages
+- presence in some fashion (maybe not a 'this person is online', but perhaps a 'someone is entering a response' ala imessage)
+- get a domain
+- set up analytics
+- make an admin page / panel
+- encrypt group names, not just posts
+- explore group 'topic' header
+- explore prompts a little
+- use the hell out of it!
+
+
+*/
+
+
 class Group extends CI_Controller
 {
 	function __construct()
@@ -8,7 +37,6 @@ class Group extends CI_Controller
 
 		$this->load->model('group_model');
 		$this->load->model('post_model');
-//		$this->load->model('tabk_auth/');
 
 		$this->load->helper('url');
 		$this->load->helper('date');
@@ -18,7 +46,7 @@ class Group extends CI_Controller
 		$this->load->config('tank_auth', TRUE);
 		
 		$this->load->library('gravatar');
-		$this->load->library('encrypt');
+		$this->load->library('encrypter');
 	}
 
 	function index() {
@@ -80,7 +108,7 @@ class Group extends CI_Controller
 				$posts = $this->post_model->get_posts($groupUuid);
 
 				for($i=0; $i < count($posts); $i++) {
-					$posts[$i]->content = $this->encrypt->_decrypt($posts[$i]->content);
+					$posts[$i]->content = $this->encrypter->decryptData($posts[$i]->content);
 				}
 				
 				$data['posts'] = $posts;

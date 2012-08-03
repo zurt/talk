@@ -26,6 +26,10 @@ a:visited {
 	
 }
 
+.post {
+	margin-bottom: 25px;
+}
+
 .postHeader{
 	height: 30px;
 }

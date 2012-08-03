@@ -11,9 +11,10 @@ foreach($posts as $post) { ?>
 		</div>
 		<div class="postContent">
 	<? echo $post->content;
-}
-?>
+	?>
 	</div>
+</div>
+<? } ?>
 
 <h3>Post</h3>
 <form action="/group/addPost" method="post">
@@ -21,7 +22,6 @@ foreach($posts as $post) { ?>
 	<input type="hidden" name="groupUuid" value="<? echo $groupUuid; ?>">
 	<input type="submit" value="Submit" id="newgroup_Submit" class="btn">
 </form>
-</div>
 </div>
 
 
