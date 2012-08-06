@@ -67,7 +67,7 @@ class Group extends CI_Controller
 				$updateData['inviteUuid'] = sha1(uniqid());
 		
 				$groupUuid = $this->group_model->add_group($updateData);
-				error_log($groupUuid);
+				//error_log($groupUuid);
 				//now add the user to the group
 				$updateData=array();
 				$updateData['groupUuid'] = $groupUuid;
@@ -118,7 +118,7 @@ class Group extends CI_Controller
 
 				for($i=0; $i < count($posts); $i++) {
 					$posts[$i]->content = $this->encrypter->decryptData($posts[$i]->content);
-					error_log($posts[$i]->content);
+					//error_log($posts[$i]->content);
 				}
 				
 				$data['posts'] = $posts;

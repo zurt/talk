@@ -13,6 +13,11 @@ class Post_model extends CI_Model {
 		return ($this->db->insert_id());
 	}
 	
+	function add_email_content($data) {
+		$this->db->insert('email-responses', $data);
+		return ($this->db->insert_id());		
+	}
+	
 	
 	public function get_posts($groupUuid) {
 		$this->db->select("*");

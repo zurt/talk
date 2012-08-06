@@ -14,6 +14,7 @@ class Post extends CI_Controller
 		
 		$this->load->library('tank_auth');
 		$this->load->library('encrypter');
+		$this->load->library('mail');
 	}
 
 	function index() {
@@ -30,6 +31,18 @@ class Post extends CI_Controller
 			$post = strip_html_tags($this->input->post('post'), 'img|b|i|strong');
 			$post = close_tags($post);
 			//error_log($post);
+			
+			//let's send an email about this post...
+			//we aren't currently queueing them up, which is kind of a pisser
+			//but it seems appfog doesn't support cron jobs
+			//i need to look into ironworker to see if that will serve the need
+			
+			//in the meantime, i'm sending a mail every time a post is made, but only if i'm the author
+			
+			if ($userId == 2) {
+				$this->mail->sendMail("tripp@madeofglass.com", "trippp@gmail.com", $post);
+			}
+			
 			if ($post != "") {
 				$updateData['content'] = $this->encrypter->encryptData($post);
 				$postUuid = $this->post_model->add_post($updateData);
@@ -37,6 +50,7 @@ class Post extends CI_Controller
 			redirect('/group/' . $updateData['groupUuid']);
 		}
 	}//of addPost
+	
 	
 }
 
