@@ -67,6 +67,9 @@ class Api extends REST_Controller
 		$data['content-id-map'] = $this->input->post('content-id-map');
 	
 		$this->post_model->add_email_content($data);
+		
+		
+		$this->post_model->
 	
 		$this->response("", 200); // 200 being the HTTP response code
     }//of game_post (new game)

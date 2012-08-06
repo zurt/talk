@@ -12,14 +12,12 @@ class Mail {
 	
 		$this->ci =& get_instance();
 		
-		$this->ci->load->library('curl');
+		//$this->ci->load->library('curl');
 	}
 	
 	
 	
 	public function sendMail($to, $from, $post) {
-		//$data['img'] = $this->curl->simple_get('http://roflcat.heroku.com/');
-		
 		/*
 		curl -s -k --user api:key-24sviiqk3e4xkty-ce-70h5p2qorpe72 \
 		    https://api.mailgun.net/v2/talktrippp.mailgun.org/messages \
@@ -48,7 +46,7 @@ class Mail {
 		
 		//$this->ci->curl->debug_request();
 		//$this->ci->curl->debug();
-		error_log($to . " " . $from . " " . $post);
+		//error_log($to . " " . $from . " " . $post);
 	}
 
 }

@@ -40,7 +40,7 @@ class Post extends CI_Controller
 			//in the meantime, i'm sending a mail every time a post is made, but only if i'm the author
 			
 			if ($userId == 2) {
-				$this->mail->sendMail("tripp@madeofglass.com", "trippp@gmail.com", $post);
+				$this->mail->sendMail("trippp@gmail.com", "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.com", $post);
 			}
 			
 			if ($post != "") {
