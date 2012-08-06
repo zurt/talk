@@ -38,9 +38,12 @@ class Post extends CI_Controller
 			//i need to look into ironworker to see if that will serve the need
 			
 			//in the meantime, i'm sending a mail every time a post is made, but only if i'm the author
+			$authorName =  $this->users->get_user_by_id($userId);
+			
+			$subject = $authorName . " has a new Cheep message for you!";
 			
 			if ($userId == 2) {
-				$this->mail->sendMail("trippp@gmail.com", "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.com", $post);
+				$this->mail->sendMail("trippp@gmail.com", "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org", $subject, $post);
 			}
 			
 			if ($post != "") {
