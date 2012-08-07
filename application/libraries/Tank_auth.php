@@ -187,6 +187,14 @@ class Tank_auth
 			if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];
 				$data['password'] = $password;
+				
+				/* ADD THE user-pref SETTINGS */
+				$this->ci->load->model('user_model');
+				$updateData['email_notif'] = 1;
+				$updateData['user_id'] = $data['user_id'];
+				$this->ci->user_model->update_prefs($updateData);
+				
+				
 				unset($data['last_ip']);
 				return $data;
 			}

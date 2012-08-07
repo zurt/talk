@@ -72,6 +72,7 @@
 							<!--<? if (isset($user->email) && $user->email != "") { ?>
 								<li><a href="/user" id="loggedInUser"><? echo $user->username; ?></a></li>
 							<? } ?>-->
+							<li><a href="/user" id="loggedInUser" title="Prefs"><img src="/assets/img/gear.png" alt="Prefs"></a></li>
 							<li><a href="/about">About</a></li>
 							<!--<li><a href="http://blog.rightblank.com">Blog</a></li>
 							<li><a data-toggle="modal" href="#feedbackModal" >Feedback</a></li>-->

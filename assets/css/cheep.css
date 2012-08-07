@@ -30,6 +30,11 @@ a:visited {
 	margin-bottom: 25px;
 }
 
+.postHeader a {
+	color: black;
+	text-decoration: none;
+}
+
 .postHeader{
 	height: 30px;
 }

@@ -158,6 +158,7 @@ class Auth extends CI_Controller
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
 						$email_activation))) {									// success
+					
 
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
 

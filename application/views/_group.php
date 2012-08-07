@@ -4,10 +4,10 @@
 //list posts
 foreach($posts as $post) { ?>
 	<div class="post">
-		<div class="postHeader">
-			<? echo "<img src=\"" . $post->image . "\">";
+		<div class="postHeader" id="<? echo $post->postUuid; ?>">
+			<a name="<? echo $post->postUuid; ?>"><? echo "<img src=\"" . $post->image . "\">";
 			echo " " . $post->username . ", " . $post->dateCreated;
-			?>
+			?></a>
 		</div>
 		<div class="postContent">
 	<? echo $post->content;
