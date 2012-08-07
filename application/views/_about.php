@@ -15,7 +15,7 @@
 </ul>
 
 <h2>How do I invite people to join me?</h2>
-<p>Share the invite code.  That's it.  They'll need to sign up, of course, but you can share it however you desire.  And since it isn't tied to their email address, they can register whatever email they want with the site.  Everyone wins!</p>
+<p>Share the invite code.  That's it.  They'll need to sign up, of course, but you can share it however you desire.  Because you share the code with them (instead of us sending out invitations on your behalf), they can register whatever email they want with the site.  Everyone wins!</p>
 <p>Do note that everyone in the group has the invite code and can invite others to join.</p>
 
 <h2>I've been given an invite code and I don't know what to do</h2>
