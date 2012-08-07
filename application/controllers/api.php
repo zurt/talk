@@ -98,12 +98,11 @@ class Api extends REST_Controller
 			//convert the timestamp
 			$updateData['dateCreated'] = date("Y-m-d H:i:s", $data['timestamp']);
 
-			log_message("error", $updateData['groupUuid'] . " " . $updateData['author']);
+			//log_message("error", $updateData['groupUuid'] . " " . $updateData['author']);
 
 			$postUuid = $this->post_model->add_post($updateData);
 		}
-		//$this->post_model->add_post($data);
-	
+		
 		$this->response("", 200); // 200 being the HTTP response code
     }//of game_post (new game)
     
