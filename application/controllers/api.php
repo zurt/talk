@@ -22,6 +22,16 @@ class Api extends REST_Controller
 		parent::__construct();
 
 		$this->load->model('post_model');
+		
+		$this->load->library('tank_auth');
+		$this->lang->load('tank_auth');
+		$this->load->config('tank_auth', TRUE);
+		
+		$this->load->library('encrypter');
+		$this->load->helper('url');
+		$this->load->helper('strip_html_tags');
+		$this->load->helper('close_tags');
+		
 	}
 
 
@@ -49,6 +59,8 @@ class Api extends REST_Controller
 		message-headers		string
 		content-id-map 		string
 		*/
+		
+		
 		$data['recipient'] = $this->input->post('recipient');
 		$data['sender'] = $this->input->post('sender');
 		$data['from'] = $this->input->post('from');
@@ -67,9 +79,30 @@ class Api extends REST_Controller
 		$data['content-id-map'] = $this->input->post('content-id-map');
 	
 		$this->post_model->add_email_content($data);
-		
-		
-		$this->post_model->
+
+			
+		if ($data['stripped-text'] != "") {
+			//need to take the sender and look up the user by email
+			$user = $this->users->get_user_by_login($data['sender']);
+
+			$updateData['author'] = $user->id;
+			$updateData['content'] = $this->encrypter->encryptData($data['stripped-text']);
+			$updateData['postUuid'] = uniqid();
+
+			//need to parse the 'recipient' field to get the group id
+			//$match = preg_match ( "/[\+@]+/", $data['recipient']);
+			$match = explode("@", $data['recipient']);
+			$match = explode("+", $match[0]);
+			$updateData['groupUuid'] = $match[1];
+
+			//convert the timestamp
+			$updateData['dateCreated'] = date("Y-m-d H:i:s", $data['timestamp']);
+
+			log_message("error", $updateData['groupUuid'] . " " . $updateData['author']);
+
+			$postUuid = $this->post_model->add_post($updateData);
+		}
+		//$this->post_model->add_post($data);
 	
 		$this->response("", 200); // 200 being the HTTP response code
     }//of game_post (new game)

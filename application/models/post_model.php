@@ -7,8 +7,6 @@ class Post_model extends CI_Model {
 	
 	public function add_post($data) {
 		//requires: uniqId, userId, comment
-		
-		$data['dateCreated'] = date('Y-m-d H:i:s');
 		$this->db->insert('post', $data);
 		return ($this->db->insert_id());
 	}

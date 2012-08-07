@@ -13,6 +13,9 @@ class Post extends CI_Controller
 		$this->load->helper('close_tags');
 		
 		$this->load->library('tank_auth');
+		$this->lang->load('tank_auth');
+		$this->load->config('tank_auth', TRUE);
+		
 		$this->load->library('encrypter');
 		$this->load->library('mail');
 	}
@@ -27,6 +30,7 @@ class Post extends CI_Controller
 			//grab the name of the group and then add it to the db
 			$updateData['groupUuid'] = $this->input->post('groupUuid');
 			$updateData['postUuid'] = uniqid();
+			$updateData['dateCreated'] = date('Y-m-d H:i:s');
 			
 			$post = strip_html_tags($this->input->post('post'), 'img|b|i|strong');
 			$post = close_tags($post);
@@ -38,9 +42,9 @@ class Post extends CI_Controller
 			//i need to look into ironworker to see if that will serve the need
 			
 			//in the meantime, i'm sending a mail every time a post is made, but only if i'm the author
-			$authorName =  $this->users->get_user_by_id($userId);
+			$author =  $this->users->get_user_by_id($userId, 1);
 			
-			$subject = $authorName . " has a new Cheep message for you!";
+			$subject = $author->username . " has a new Cheep message for you!";
 			
 			if ($userId == 2) {
 				$this->mail->sendMail("trippp@gmail.com", "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org", $subject, $post);

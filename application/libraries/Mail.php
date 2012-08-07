@@ -17,7 +17,7 @@ class Mail {
 	
 	
 	
-	public function sendMail($to, $from, $post) {
+	public function sendMail($to, $from, $subject, $post) {
 		/*
 		curl -s -k --user api:key-24sviiqk3e4xkty-ce-70h5p2qorpe72 \
 		    https://api.mailgun.net/v2/talktrippp.mailgun.org/messages \
@@ -30,14 +30,13 @@ class Mail {
 		//$this->ci->curl->ssl(FALSE);
 		//$this->ci->curl->http_login($username = '', $password = '', $type = 'any');
 		
-		$subject = "Cheep message";
-		
 		$ch = curl_init("https://api.mailgun.net/v2/talktrippp.mailgun.org/messages");
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, array('from'=>$from, 'to'=>$to, 'subject'=>$subject, 'text'=>$post));
 		curl_setopt($ch, CURLOPT_USERPWD, "api:key-24sviiqk3e4xkty-ce-70h5p2qorpe72");
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 		//curl_setopt($ch, CURLOPT_MUTE, 1);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		
