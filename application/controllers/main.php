@@ -51,6 +51,8 @@ class Main extends CI_Controller
 		
 		//get user info
 		$data['user'] = $this->users->get_user_by_id($data['user_id'], 1);
+		//get groups
+		$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
 		
 		$this->load->view('templates/header2', $data);
 		$this->load->view('_about', $data);

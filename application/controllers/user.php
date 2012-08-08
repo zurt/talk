@@ -28,6 +28,8 @@ class User extends CI_Controller
 		
 		//get user info
 		$data['user'] = $this->users->get_user_by_id($data['user_id'], 1);
+		//get groups
+		$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
 		
 		//get user prefs
 		$data['prefs'] = $this->user_model->get_user_prefs($data['user_id']);

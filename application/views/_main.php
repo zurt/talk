@@ -19,7 +19,7 @@ foreach($groups as $group) {
 		echo "s";
 	}
 	echo ") (Invite code: " . $group->inviteUuid;
-	echo " )<br>";
+	echo " )<br><br>";
 }
 }
 ?>
