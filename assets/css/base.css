@@ -1,0 +1,24 @@
+
+/* widening the max width allowing me to embiggen the new list form */
+.dropdown-menu {
+	max-width: 310px;
+	top: 85%;
+	left: 10%;
+}
+
+
+/* addresses the conflict in the bootstrap drowdown style with the css sprite from chosen */
+.dropdown-menu .chzn-container a {
+	padding: 0px;
+}
+
+.dropdown {
+	font-size: 1.2em;
+}
+
+
+/* spacing for the "Hi, username" in the account dropdown */
+.dropdown-text {
+	margin-left: 10px;
+}
+

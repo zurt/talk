@@ -43,6 +43,7 @@
 		<link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
 		
 		<script type="text/javascript" src="/assets/js/jquery.js"></script>
+		
 	</head>
 	<body id="top">
 	
@@ -69,11 +70,28 @@
 							<li><a href="/new">+ New Game</a></li>
 						</ul>-->
 						<ul class="nav pull-right">
+							
+							<? if($this->tank_auth->is_logged_in()) { ?>
+							<li class="dropdown">
+								<a href="#" data-toggle="dropdown">Your Groups<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<? foreach($groups as $group) { ?>
+									<li>
+										<a href="/group/<? echo $group->groupUuid; ?>"><? echo $group->groupName; ?>
+										<?if ($group->unseenPostCount > 0) {
+											echo "(" . 	$group->unseenPostCount . " new)";
+										} ?>
+										</a>
+									</li>
+									<? } ?>
+								</ul>
+							</li>
+							<? } ?>
+							<li><a href="/about">About</a></li>
 							<!--<? if (isset($user->email) && $user->email != "") { ?>
 								<li><a href="/user" id="loggedInUser"><? echo $user->username; ?></a></li>
 							<? } ?>-->
 							<li><a href="/user" id="loggedInUser" title="Prefs"><img src="/assets/img/gear.png" alt="Prefs"></a></li>
-							<li><a href="/about">About</a></li>
 							<!--<li><a href="http://blog.rightblank.com">Blog</a></li>
 							<li><a data-toggle="modal" href="#feedbackModal" >Feedback</a></li>-->
 							<? if (isset($user->email) && $user->email != "") { ?>

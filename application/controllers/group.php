@@ -109,6 +109,12 @@ class Group extends CI_Controller
 				$data['user_id'] = $this->tank_auth->get_user_id();
 				$data['username'] = $this->tank_auth->get_username();
 				//$data['groupUuid'] = $groupUuid;
+				//get groups
+				$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
+				foreach($data['groups'] as $group) {
+					//$group->postCount = $this->group_model->get_total_posts($group->groupUuid);
+					$group->unseenPostCount = $this->group_model->get_unseen_posts($data['user_id'], $group->groupUuid);
+				}
 
 				$data['group'] = $this->group_model->get_group_info($groupUuid);
 				
