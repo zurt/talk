@@ -18,6 +18,10 @@ textarea {
 	width: 350px;
 }
 
+#footer {
+	font-size: 10px;
+}
+
 a, .dropdown-menu a {
 	color: #C3176B;
 }
