@@ -22,7 +22,7 @@ class Encrypter {
     public function decryptData($data) {
 	    $ivSize = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
 	    $iv = mcrypt_create_iv($ivSize, MCRYPT_RAND);
-        return mcrypt_decrypt(MCRYPT_RIJNDAEL_256, "gw2iYt26Gw", trim($data), MCRYPT_MODE_ECB, $iv);
+        return mcrypt_decrypt(MCRYPT_RIJNDAEL_256, "gw2iYt26Gw", $data, MCRYPT_MODE_ECB, $iv);
     }
 
 }
