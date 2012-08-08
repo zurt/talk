@@ -16,15 +16,19 @@ class Main extends CI_Controller
 
 	public function index() {
 		if (!$this->tank_auth->is_logged_in()) {
-			redirect('/auth/login/');
+			
+			$data= array();
+			
+			$this->load->view('templates/header2', $data);
+			$this->load->view('_index', $data);
+			$this->load->view('templates/footer', $data);			
+			//redirect('/auth/login/');
 		} else {
 			$data['user_id'] = $this->tank_auth->get_user_id();
 			$data['username'] = $this->tank_auth->get_username();
 			
 			//get user info
 			$data['user'] = $this->users->get_user_by_id($data['user_id'], 1);
-			
-			
 			//get groups
 			$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
 			//print_r($data['groups']);

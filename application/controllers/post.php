@@ -55,7 +55,7 @@ class Post extends CI_Controller
 			
 			$footer = "\n\n----------------\n";
 			$footer .= "Did you know that if you reply to this email, your reply will be automagically posted to the group?  It's true.\n\n";
-			$footer .= "Want to see the rest of the conversation?  Drop in on it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "\n\n";
+			$footer .= "Want to see the rest of the conversation?  Drop in on it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "\n\n";
 			
 			$footer .= "Don't want to receive email notifications when someone posts to a group?  Toggle the setting at: http://talk.aws.af.cm/user";
 			
@@ -68,7 +68,11 @@ class Post extends CI_Controller
 					$prefs = $this->user_model->get_user_prefs($member->userId);
 				
 					if(!empty($prefs) && $prefs[0]->email_notif == 1) {
-						$emailPost = $author . " said:\n" . $post . $footer;
+						//$emailPost = $author . " said:\n" . $post . $footer;
+						$group = $this->group_model->get_group_info($groupUuid);
+						$emailPost = $author . " has posted to " . $group->groupName;
+						$emailPost .= '\n"' . $post . '"';
+						$emailPost .= "\n\nView it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "\n\n";
 						$sendAddress = "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org";
 						$this->mail->sendMail($member->email, $sendAddress, $subject, $emailPost);
 					}

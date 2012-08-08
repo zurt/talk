@@ -9,15 +9,20 @@ purple: 57026A
 
 */
 
-a {
+#join-now {
+	color: white;
+}
+
+
+a, .dropdown-menu a {
 	color: #C3176B;
 }
 
-a:hover {
+a:hover, .dropdown-menu a:hover {
 	color: #EC3844;
 }
 
-a:visited {
+a:visited, .dropdown-menu a:visited {
 	color: #FC8821;
 }
 
