@@ -5,12 +5,11 @@ class User_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function update_prefs($data) {
+	public function user_email_prefs($data) {
 		$sql = 'INSERT INTO user_prefs (user_id, email_notif) VALUES (' . $data['user_id'] . ',' . $data['email_notif'] . ') ON DUPLICATE KEY UPDATE email_notif=' . $data['email_notif'];
 		$query = $this->db->query($sql);
 		//return ($this->db->insert_id());
 	}
-	
 	
 	public function get_user_prefs($userId) {
 		$this->db->select("*");

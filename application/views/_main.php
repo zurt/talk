@@ -12,7 +12,9 @@
 <?
 //list groups
 foreach($groups as $group) {
-	echo "<a href='/group/" . $group->groupUuid . "'>" . $group->groupName . "</a> (" . $group->memberCount . " member";
+	echo "<a href='/group/" . $group->groupUuid . "'>" . $group->groupName . "</a> ";
+	echo "<strong>" . $group->unseenPostCount . "</strong> unseen posts, ". $group->postCount . " total <br>";
+	echo "(" . $group->memberCount . " member";
 	if ($group->memberCount != 1) {
 		echo "s";
 	}

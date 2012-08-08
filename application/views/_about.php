@@ -26,7 +26,13 @@
 <p>Simply click the gear image in the top right (or follow <a href="/user/">this link</a>) and uncheck the box that says 'Receive email notifications'.
 
 <h2>I want to insert a picture</h2>
-<p>Right now, we support 4 HTML tags: img, b (or strong) and i.  If you want to include a picture, you'll need the URL for it.  Type in &lt;img src="[URL goes here, minus the brackets]"&gt; in your post and the image should appear.</p>
+<p>We use a modified form of what's known as bbCode.  This is the same markup you might have used on discussion forums all over the web.  Instead of putting in HTML, you simply use brackets and we do the rest!.  Here's the list of what we currently support:</p>
+<ul>
+	<li>bold: [b]your text[/b]</li>
+	<li>italics: [i]your text[/i]</li>
+	<li>images: [img]the image URL[/img]</li>
+	<li>you tube videos: [yt]the you tube link[/yt]</li>
+</ul>
 
 <h2>How do I get a profile picture?</h2>
 <p>Go to <a href="http://gravatar.com">gravatar.com</a> and register your email with them and upload a photo.  The good news is that there are many sites on the Internet that use Gravatar, so doing this once will could give you a nice icon on many sites (including Wordpress and others).</p>

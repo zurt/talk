@@ -48,7 +48,7 @@ class User extends CI_Controller
 			$updateData['user_id'] = $userId = $this->tank_auth->get_user_id();
 			//$updateData['groupName'] = $this->input->post('groupname');
 		
-			$groupUuid = $this->user_model->update_prefs($updateData);
+			$groupUuid = $this->user_model->update_email_prefs($updateData);
 
 			redirect('/user/');
 		}

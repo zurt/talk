@@ -13,6 +13,7 @@ class Post extends CI_Controller
 		$this->load->helper('url');
 		$this->load->helper('strip_html_tags');
 		$this->load->helper('close_tags');
+		//$this->load->helper('auto_link');
 		
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
@@ -20,6 +21,7 @@ class Post extends CI_Controller
 		
 		$this->load->library('encrypter');
 		$this->load->library('mail');
+		$this->load->library('bbcode');
 	}
 
 	function index() {
@@ -37,6 +39,13 @@ class Post extends CI_Controller
 			
 			$post = strip_html_tags($this->input->post('post'), 'img|b|i|strong');
 			$post = close_tags($post);
+			
+			$updateData['originalContent']=$post;
+			
+			$post = auto_link($post);
+			$post = $this->bbcode->bbcode2html($post);
+			//echo $post;
+			
 			//error_log($post);
 			
 			//let's send an email about this post...
@@ -44,7 +53,7 @@ class Post extends CI_Controller
 			//but it seems appfog doesn't support cron jobs
 			//i need to look into ironworker to see if that will serve the need
 			
-			$footer = "\n\n";
+			$footer = "\n\n----------------\n";
 			$footer .= "Did you know that if you reply to this email, your reply will be automagically posted to the group?  It's true.\n\n";
 			$footer .= "Want to see the rest of the conversation?  Drop in on it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "\n\n";
 			
@@ -55,10 +64,14 @@ class Post extends CI_Controller
 			
 			$members = $this->group_model->get_members($updateData['groupUuid']);
 			foreach($members as $member) {
-				$prefs = $this->user_model->get_user_prefs($member->userId);
+				if ($member->userId != $updateData['author']) {
+					$prefs = $this->user_model->get_user_prefs($member->userId);
 				
-				if(!empty($prefs) && $prefs[0]->email_notif == 1) {
-					$this->mail->sendMail($member->email, "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org", $subject, $post . $footer);
+					if(!empty($prefs) && $prefs[0]->email_notif == 1) {
+						$emailPost = $author . " said:\n" . $post . $footer;
+						$sendAddress = "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org";
+						$this->mail->sendMail($member->email, $sendAddress, $subject, $emailPost);
+					}
 				}
 			}
 			

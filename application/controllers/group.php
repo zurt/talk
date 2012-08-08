@@ -33,6 +33,7 @@ class Group extends CI_Controller
 
 		$this->load->model('group_model');
 		$this->load->model('post_model');
+		$this->load->model('member_model');
 
 		$this->load->helper('url');
 		$this->load->helper('date');
@@ -74,6 +75,7 @@ class Group extends CI_Controller
 				$updateData['userId'] = $userId;
 				$updateData['dateJoined'] = date('Y-m-d H:i:s');
 				$updateData['active'] = 1;
+				$updateData['dateLastActivity'] =  date('Y-m-d H:i:s');
 				$data['newGroup'] = $this->group_model->add_member($updateData);
 			}
 		}
@@ -133,6 +135,9 @@ class Group extends CI_Controller
 					$member->image = $this->gravatar->buildGravatarURL($member->email);
 					$member->dateJoined = relative_time($member->dateJoined);
 				}
+				
+				//update the user's last_activity field in user prefs
+				$this->member_model->user_last_activity($groupUuid);
 				
 				//spit it out
 				$this->load->view('templates/header2', $data);

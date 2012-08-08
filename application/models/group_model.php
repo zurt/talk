@@ -68,7 +68,7 @@ class Group_model extends CI_Model {
 	
 
 	public function get_member_groups($userId) {
-		$this->db->select("*");
+		$this->db->select("group.*");
 		$this->db->from("member");
 		$this->db->join("group", "member.groupUuid=group.groupUuid");
 		$this->db->where("userId", $userId);
@@ -76,8 +76,35 @@ class Group_model extends CI_Model {
 		//$this->db->order_by("date", "DESC");
 		
 		$query = $this->db->get();
-		//error_log($this->db->last_query());
+		error_log($this->db->last_query());
 		return $query->result();
+	}
+	
+	public function get_total_posts($groupUuid) {
+		$this->db->select("count(post.postUuid) as postCount");
+		$this->db->from("post");
+		$this->db->where("groupUuid", $groupUuid);
+		$query = $this->db->get();
+		$count = $query->row_array();
+		//error_log($this->db->last_query());
+		return 	$count['postCount'];		
+	}
+	
+	public function get_unseen_posts($userId, $groupUuid) {
+		$this->db->select("count(post.postUuid) as unseenPostCount");
+		$this->db->from("post");
+		//$this->db->join("group", "member.groupUuid=group.groupUuid");
+		$this->db->join("member", "member.groupUuid=post.groupUuid");
+		$this->db->where("userId", $userId);
+		$this->db->where("member.active", 1);
+		$this->db->where("member.groupUuid", "post.groupUuid");
+		$this->db->where("dateLastActivity <", "dateCreated");
+		//$this->db->order_by("date", "DESC");
+		
+		$query = $this->db->get();
+		$count = $query->row_array();
+		//error_log($this->db->last_query());
+		return 	$count['unseenPostCount'];	
 	}
 
 
