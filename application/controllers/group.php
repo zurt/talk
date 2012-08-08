@@ -143,7 +143,7 @@ class Group extends CI_Controller
 				}
 				
 				//update the user's last_activity field in user prefs
-				$this->member_model->user_last_activity($groupUuid);
+				$this->member_model->user_last_activity($data['user_id'], $groupUuid);
 				
 				//spit it out
 				$this->load->view('templates/header2', $data);

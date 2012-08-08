@@ -97,13 +97,14 @@ class Group_model extends CI_Model {
 		$this->db->join("member", "member.groupUuid=post.groupUuid");
 		$this->db->where("userId", $userId);
 		$this->db->where("member.active", 1);
-		$this->db->where("member.groupUuid", "post.groupUuid");
-		$this->db->where("dateLastActivity <", "dateCreated");
+		$this->db->where("member.groupUuid", $groupUuid);
+		$this->db->where("member.groupUuid", "post.groupUuid", FALSE);
+		$this->db->where("dateLastActivity <", "dateCreated", FALSE);
 		//$this->db->order_by("date", "DESC");
 		
 		$query = $this->db->get();
 		$count = $query->row_array();
-		//error_log($this->db->last_query());
+		error_log($this->db->last_query());
 		return 	$count['unseenPostCount'];	
 	}
 
