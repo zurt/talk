@@ -73,7 +73,7 @@
 							
 							<? if($this->tank_auth->is_logged_in()) { ?>
 							<li class="dropdown">
-								<a href="#" data-toggle="dropdown">Your Groups<b class="caret"></b></a>
+								<a href="#" data-toggle="dropdown">Groups<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<? foreach($groups as $group) { ?>
 									<li>

@@ -13,6 +13,10 @@ purple: 57026A
 	color: white;
 }
 
+textarea {
+	height: 200px;
+	width: 350px;
+}
 
 a, .dropdown-menu a {
 	color: #C3176B;
