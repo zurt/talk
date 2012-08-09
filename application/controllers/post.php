@@ -69,10 +69,11 @@ class Post extends CI_Controller
 				
 					if(!empty($prefs) && $prefs[0]->email_notif == 1) {
 						//$emailPost = $author . " said:\n" . $post . $footer;
-						$group = $this->group_model->get_group_info($groupUuid);
-						$emailPost = $author . " has posted to " . $group->groupName;
-						$emailPost .= '\n"' . $post . '"';
+						$group = $this->group_model->get_group_info($updateData['groupUuid']);
+						$emailPost = $author->username . " has posted to " . $group->groupName . ":";
+						$emailPost .= "\n" . $post;
 						$emailPost .= "\n\nView it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "\n\n";
+						$emailPost . = $footer;
 						$sendAddress = "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org";
 						$this->mail->sendMail($member->email, $sendAddress, $subject, $emailPost);
 					}
