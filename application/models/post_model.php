@@ -29,6 +29,23 @@ class Post_model extends CI_Model {
 		return $query->result();		
 	}
 	
+	public function get_current_post($groupUuid) {
+		$this->db->select("postUuid");
+		$this->db->from("post");
+		$this->db->join("users", "id=author");
+		$this->db->where("groupUuid", $groupUuid);
+		$this->db->limit(1);
+		$this->db->order_by("dateCreated", "DESC");
+		
+		$query = $this->db->get();
+		//error_log($this->db->last_query());
+		//return $query->result();	
+		
+		$postUuid = $query->row_array();
+		error_log($this->db->last_query());
+		return 	$postUuid['postUuid'];	
+	}
+	
 	/*
 	public function add_group($data) {
 		//requires: uniqId, userId, comment

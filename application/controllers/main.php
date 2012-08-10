@@ -7,6 +7,7 @@ class Main extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('group_model');
+		$this->load->model('post_model');
 
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
@@ -35,7 +36,20 @@ class Main extends CI_Controller
 			
 			foreach($data['groups'] as $group) {
 				$group->postCount = $this->group_model->get_total_posts($group->groupUuid);
-				$group->unseenPostCount = $this->group_model->get_unseen_posts($data['user_id'], $group->groupUuid);
+				$tempComments = $this->group_model->get_unseen_posts($data['user_id'], $group->groupUuid);
+				$group->unseenPostCount = $tempComments[0]->unseenPostCount;
+				$group->postUuid = "";
+				if($tempComments[0]->postUuid == "") {
+					$group->postUuid = $this->post_model->get_current_post($group->groupUuid);
+				}
+				else {
+					$group->postUuid = $tempComments[0]->postUuid;
+				}
+				
+				if ($group->postUuid != "") {
+					$group->postUuid = "#" . $group->postUuid;
+				}
+				
 				$group->members = $this->group_model->get_members($group->groupUuid);
 				foreach($group->members as $member) {
 					$member->image = $this->gravatar->buildGravatarURL($member->email);

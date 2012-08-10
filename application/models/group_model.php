@@ -91,7 +91,7 @@ class Group_model extends CI_Model {
 	}
 	
 	public function get_unseen_posts($userId, $groupUuid) {
-		$this->db->select("count(post.postUuid) as unseenPostCount");
+		$this->db->select("postUuid, count(post.postUuid) as unseenPostCount");
 		$this->db->from("post");
 		//$this->db->join("group", "member.groupUuid=group.groupUuid");
 		$this->db->join("member", "member.groupUuid=post.groupUuid");
@@ -103,9 +103,10 @@ class Group_model extends CI_Model {
 		//$this->db->order_by("date", "DESC");
 		
 		$query = $this->db->get();
-		$count = $query->row_array();
+		/*$count = $query->row_array();
 		error_log($this->db->last_query());
-		return 	$count['unseenPostCount'];	
+		return 	$count['unseenPostCount'];	*/
+		return $query->result();
 	}
 
 

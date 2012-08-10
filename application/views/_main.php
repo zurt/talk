@@ -13,7 +13,7 @@
 <?
 //list groups
 	foreach($groups as $group) {
-		echo "<li><a href='/group/" . $group->groupUuid . "'>" . $group->groupName . "</a> ";
+		echo "<li><a href='/group/" . $group->groupUuid . $group->postUuid . "'>" . $group->groupName . "</a> ";
 		echo "<strong>" . $group->unseenPostCount . "</strong> unseen posts, ". $group->postCount . " total <br>";
 		/*
 		echo "(" . $group->memberCount . " member";
