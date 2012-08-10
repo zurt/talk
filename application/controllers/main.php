@@ -31,12 +31,16 @@ class Main extends CI_Controller
 			$data['user'] = $this->users->get_user_by_id($data['user_id'], 1);
 			//get groups
 			$data['groups'] = $this->group_model->get_member_groups($data['user_id']);
-			//print_r($data['groups']);
+			
+			
 			foreach($data['groups'] as $group) {
 				$group->postCount = $this->group_model->get_total_posts($group->groupUuid);
 				$group->unseenPostCount = $this->group_model->get_unseen_posts($data['user_id'], $group->groupUuid);
+				$group->members = $this->group_model->get_members($group->groupUuid);
+				foreach($group->members as $member) {
+					$member->image = $this->gravatar->buildGravatarURL($member->email);
+				}
 			}
-			//print_r($group);
 			
 			$this->load->view('templates/header2', $data);
 			$this->load->view('_main', $data);

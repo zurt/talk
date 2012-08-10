@@ -23,7 +23,7 @@
 
 <h2>I don't want to get email notifications</h2>
 <p>No problem.  We want to let you know when something happens in your groups, but we understand if you'd prefer not to get email notifications.</p>
-<p>Simply click the gear image in the top right (or follow <a href="/user/">this link</a>) and uncheck the box that says 'Receive email notifications'.
+<p>Simply click the gear image in the top right (or follow <a href="/user/">this link</a>) and uncheck the box that says 'Receive email notifications'.</p>
 
 <h2>I want to insert a picture</h2>
 <p>We use a modified form of what's known as bbCode.  This is the same markup you might have used on discussion forums all over the web.  Instead of putting in HTML, you simply use brackets and we do the rest!.  Here's the list of what we currently support:</p>
@@ -41,4 +41,4 @@
 <p>The roadmap for Cheep has a lot of exciting things in store for it.  We're building as quickly as we can, but we'd love to hear what you can't live without so we can make Cheep as useful as possible to you.</p>
 <p>Some of the things we plan on adding include: daily digests, sharable groups, more control over the invite codes and a bunch of other stuff!</p>
 <p> Do any of these sound good to you?  Are there other things you'd like to have?</p>
-<p><a href="cheep@16ths.com">Let us know!</a></p>
+<p><a href="mailto:cheep@16ths.com">Let us know!</a></p>

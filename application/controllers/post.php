@@ -73,8 +73,9 @@ class Post extends CI_Controller
 						$emailPost = $author->username . " has posted to " . $group->groupName . ":";
 						$emailPost .= "\n" . $post;
 						$emailPost .= "\n\nView it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "\n\n";
-						$emailPost . = $footer;
+						$emailPost .= $footer;
 						$sendAddress = "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org";
+						
 						$this->mail->sendMail($member->email, $sendAddress, $subject, $emailPost);
 					}
 				}
@@ -84,7 +85,7 @@ class Post extends CI_Controller
 				$updateData['content'] = $this->encrypter->encryptData($post);
 				$postUuid = $this->post_model->add_post($updateData);
 			}
-			redirect('/group/' . $updateData['groupUuid']);
+			redirect('/group/' . $updateData['groupUuid'] . "#" . $updateData['postUuid']);
 		}
 	}//of addPost
 	

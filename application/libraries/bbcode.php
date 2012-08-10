@@ -8,6 +8,7 @@ class Bbcode {
 		$text = preg_replace('/\[yt\].*[\\?\\&]v=([^\\?\\&]+).*\[\/yt\]/', '[youtube]\1[/youtube]', $text);
 		
 		return preg_replace(array(
+			'/\n/', 
     		'/\[b\](.*?)\[\/b\]/ms', 
 		    '/\[i\](.*?)\[\/i\]/ms',
 		    '/\[u\](.*?)\[\/u\]/ms',
@@ -22,6 +23,7 @@ class Bbcode {
 		    '/\[list\](.*?)\[\/list\]/ms',
 		    '/\[\*\]\s?(.*?)\n/ms'
 		   ),array(
+			'<br>',
 		    '<strong>\1</strong>',
 		    '<em>\1</em>',
 		    '<u>\1</u>',

@@ -192,7 +192,7 @@ class Tank_auth
 				$this->ci->load->model('user_model');
 				$updateData['email_notif'] = 1;
 				$updateData['user_id'] = $data['user_id'];
-				$this->ci->user_model->update_prefs($updateData);
+				$this->ci->user_model->user_email_prefs($updateData);
 				
 				
 				unset($data['last_ip']);

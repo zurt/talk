@@ -9,19 +9,28 @@
 
 <? if (count($groups) > 0) { ?>
 <h4 class="mainHeader">Your Groups</h4>
+<ul>
 <?
 //list groups
-foreach($groups as $group) {
-	echo "<a href='/group/" . $group->groupUuid . "'>" . $group->groupName . "</a> ";
-	echo "<strong>" . $group->unseenPostCount . "</strong> unseen posts, ". $group->postCount . " total <br>";
-	echo "(" . $group->memberCount . " member";
-	if ($group->memberCount != 1) {
-		echo "s";
+	foreach($groups as $group) {
+		echo "<li><a href='/group/" . $group->groupUuid . "'>" . $group->groupName . "</a> ";
+		echo "<strong>" . $group->unseenPostCount . "</strong> unseen posts, ". $group->postCount . " total <br>";
+		/*
+		echo "(" . $group->memberCount . " member";
+		if ($group->memberCount != 1) {
+			echo "s";
+		}
+		echo ") ";
+		*/
+		echo "(Invite code: " . $group->inviteUuid;
+		echo " )<br>";
+		foreach($group->members as $member) {
+			echo "<img src=\"" . $member->image . "\" title=\"" . $member->username . "\"> ";
+		}
+		echo "<br><br> </li>";
 	}
-	echo ") (Invite code: " . $group->inviteUuid;
-	echo " )<br><br>";
 }
-}
+echo "</ul>";
 ?>
 
 

@@ -85,22 +85,31 @@ class Api extends REST_Controller
 			//need to take the sender and look up the user by email
 			$user = $this->users->get_user_by_login($data['sender']);
 
-			$updateData['author'] = $user->id;
-			$updateData['content'] = $this->encrypter->encryptData($data['stripped-text']);
-			$updateData['postUuid'] = uniqid();
+			//if the user doesn't belong, join the user
+			if (empty($user)) {
+				//
+			}
+			
+			if (isset($user)) {
+				//then post it
+		
+				$updateData['author'] = $user->id;
+				$updateData['content'] = $this->encrypter->encryptData($data['stripped-text']);
+				$updateData['postUuid'] = uniqid();
 
-			//need to parse the 'recipient' field to get the group id
-			//$match = preg_match ( "/[\+@]+/", $data['recipient']);
-			$match = explode("@", $data['recipient']);
-			$match = explode("+", $match[0]);
-			$updateData['groupUuid'] = $match[1];
+				//need to parse the 'recipient' field to get the group id
+				//$match = preg_match ( "/[\+@]+/", $data['recipient']);
+				$match = explode("@", $data['recipient']);
+				$match = explode("+", $match[0]);
+				$updateData['groupUuid'] = $match[1];
 
-			//convert the timestamp
-			$updateData['dateCreated'] = date("Y-m-d H:i:s", $data['timestamp']);
+				//convert the timestamp
+				$updateData['dateCreated'] = date("Y-m-d H:i:s", $data['timestamp']);
 
-			//log_message("error", $updateData['groupUuid'] . " " . $updateData['author']);
+				//log_message("error", $updateData['groupUuid'] . " " . $updateData['author']);
 
-			$postUuid = $this->post_model->add_post($updateData);
+				$postUuid = $this->post_model->add_post($updateData);
+			}
 		}
 		
 		$this->response("", 200); // 200 being the HTTP response code

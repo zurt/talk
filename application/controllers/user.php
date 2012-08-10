@@ -8,6 +8,7 @@ class User extends CI_Controller
 
 		
 		$this->load->model('user_model');
+		$this->load->model('group_model');
 
 		$this->load->helper('url');
 		//$this->load->helper('strip_html_tags');

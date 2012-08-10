@@ -4,7 +4,7 @@
 	<header class="masthead">
 	<div class="inner hero-unit">
 		<h1>Cheep</h1>
-		<h2>Private messageboards </h2>
+		<h2>Private messageboards</h2>
 		<hr>
 		<p>It's easy:</p>
 		<ul>
@@ -13,15 +13,15 @@
 			<li>Get notified when new posts are made</li>
 		</ul>
 		<br /><br />
-		<a href="/auth/login" class="btn btn-large btn-warning" id="join-now">Join Now</a>
+		<a href="/auth/register" class="btn btn-large btn-warning" id="join-now">Join Now</a>
 	</div>
 </div>
 		<div class="span6">
 			<div id="cta">
 				<h3>Why private messaging?</h3>
-				<p>Email is great.  But there are a lot of things emails can't do well -- like long-form group conversations.  that's where Cheep comes in.</p>
-				<p>We want to make talking with groups of people online easy and fun.  It might be family vacation planning, event organization or even just trading cool links.</p>
-				<p>Fire it up, give it a whirl and let us know what you think!  Go on and <a href="/auth/login/">join now</a>.</p>
+				<p>Email is great.  But there are a lot of things emails can't do well -- and that's where Cheep comes in.</p>
+				<p>It's a place to put messages, links, pictures and videos that you want to share and talk about with a small group of people.  Cheep makes talking with groups online simple.</p>
+				<p>Fire it up, give it a whirl and let us know what you think!  Go on and <a href="/auth/register">join now</a>.</p>
 			</div>
 		</div>
 </div>

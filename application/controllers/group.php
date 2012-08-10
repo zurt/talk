@@ -3,15 +3,12 @@
 
 /*
 TO-DO
-- add a few layout tweaks to the 2 main pages
-
 
 - explore other words for 'group' and 'post' (I'm partial to 'clan' at the moment; it has a nice double connotation with both online and meat space.)
 - get a domain
 - set up analytics
 - make an admin page / panel
 - daily digests
-- track 'viewed' messages per user
 - scroll to last viewed message on a page
 - think about rss feeds for groups (with security somehow)
 - realtime messaging / don't force a refresh
@@ -79,6 +76,9 @@ class Group extends CI_Controller
 				$data['newGroup'] = $this->group_model->add_member($updateData);
 			}
 		}
+		
+		$message = "Group created.  Share the invitation code with others so they can join in on the conversation!";
+		$this->session->set_flashdata('message', $message);
 		redirect('/');
 	}
 	
