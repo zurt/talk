@@ -22,12 +22,15 @@ class Api extends REST_Controller
 		parent::__construct();
 
 		$this->load->model('post_model');
+		$this->load->model('post_attachments_model');
+		$this->load->model('group_model');
 		
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
 		$this->load->config('tank_auth', TRUE);
 		
 		$this->load->library('encrypter');
+		$this->load->library('s3');
 		$this->load->helper('url');
 		$this->load->helper('strip_html_tags');
 		$this->load->helper('close_tags');
@@ -77,37 +80,128 @@ class Api extends REST_Controller
 		$data['signature'] = $this->input->post('signature');
 		$data['message-headers'] = $this->input->post('message-headers');
 		$data['content-id-map'] = $this->input->post('content-id-map');
+			
+		//save images
+		/*if($data['attachment-count'] > 0) {
+			$data['attachment-content'] = $this->input->post('attachment-1');
+		}*/
+		
+		//need to parse the 'recipient' field to get the group id
+		//$match = preg_match ( "/[\+@]+/", $data['recipient']);
+		$match = explode("@", $data['recipient']);
+		$match = explode("+", $match[0]);
+		$updateData['groupUuid'] = $match[1];
+		
+		$updateData['postUuid'] = uniqid();
+		
+		// Instantiate the class
+		$s3 = new S3($this->config->item('awsAccessKey'),  $this->config->item('awsSecretKey'));
+		$bucketName = "jabberlap";
+		
+		foreach($_FILES as $file){
+		    $name = $file['name'];
+		    $type = $file['type'];
+			$data['attachment-content'] .= $updateData['groupUuid'] . "/" . $name . ":" . $type . "::";
+			
+			/*
+			//this comes out because appfog is fried:
+			//uploading code wipes out the old version and downloading source doesn't include changes made on the server
+			//which means all ugc will be lost each time there is an upload.  barf.
+			mkdir("./tmp/tester/");
+			if (!move_uploaded_file($file['tmp_name'], "./tmp/tester/$name")) 
+				$data['attachment-content'] .= "CANNOT MOVE $name" . PHP_EOL;
+			*/
+
+			// Put our file (also with public read access)
+			$s3->putObjectFile($file['tmp_name'], $bucketName, $updateData['groupUuid'] . "/" . $name, S3::ACL_PUBLIC_READ);
+			
+			//now we need to store the attachment details in the post-attachment table, so we can easily get them out later
+			$postData['postUuid'] = $updateData['postUuid'];
+			$postData['uri'] = $updateData['groupUuid'] . "/" . $name;
+			$postData['mimeType'] = $type;
+			$this->post_attachments_model->store_uri($postData);
+		}
 	
 		$this->post_model->add_email_content($data);
-
+		
+		/*
+		TO-DO:
+		- check that the group actually exists before doing any of this
+		- a better way of assigning user names to people -- something that ensures uniqueness
+		*/
 			
-		if ($data['stripped-text'] != "") {
+		if ($data['stripped-text'] != "" || $data['attachment-count'] !=0) {
 			//need to take the sender and look up the user by email
 			$user = $this->users->get_user_by_login($data['sender']);
 
 			//if the user doesn't belong, join the user
 			if (empty($user)) {
-				//
-			}
-			
-			if (isset($user)) {
+				//the user isn't in the system
+				$username = explode("<", $data['from']);
+				$username=$username[0];
+				
+				$password = "";
+				for($i=0; $i<6; $i++) {
+					$password .= chr(rand(0, 25) + ord('a'));
+				}
+				
+				$userTemp = $this->tank_auth->create_user($username, $data['sender'], $password, 0);
+				$user->id = $userTemp['user_id'];
+				
+				//send an email with password
+				$data['password'] = $password;
+				$data['site_name'] = $this->config->item('website_name', 'tank_auth');
+				$data['username'] = $data['sender'];
+				$data['email'] = $data['sender'];
+				
+				//$this->tank_auth->_send_email($user->id, $data['sender'], &$data);
+				$type="assign-password";
+				
+				$this->load->library('email');
+				$this->email->from($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
+				$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
+				$this->email->to($data['email']);
+				$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
+				$this->email->message($this->load->view('email/'.$type.'-html', $data, TRUE));
+				$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', $data, TRUE));
+				$this->email->send();
+			}			
+		
+			if (isset($user->id)) {
 				//then post it
 		
 				$updateData['author'] = $user->id;
 				$updateData['content'] = $this->encrypter->encryptData($data['stripped-text']);
-				$updateData['postUuid'] = uniqid();
 
-				//need to parse the 'recipient' field to get the group id
-				//$match = preg_match ( "/[\+@]+/", $data['recipient']);
-				$match = explode("@", $data['recipient']);
-				$match = explode("+", $match[0]);
-				$updateData['groupUuid'] = $match[1];
+				$post = strip_html_tags($data['stripped-text'], 'img|b|i|strong');
+				$post = close_tags($post);
+				$updateData['originalContent'] = $post;
 
 				//convert the timestamp
 				$updateData['dateCreated'] = date("Y-m-d H:i:s", $data['timestamp']);
 
-				//log_message("error", $updateData['groupUuid'] . " " . $updateData['author']);
-
+				//join group
+				
+				$data2['userId'] = $updateData['author'];
+				$data2['groupUuid'] = $updateData['groupUuid'];
+				//echo $this->group_model->is_member_of_group($data2);
+				if($this->group_model->is_member_of_group($data2)==0) {
+					
+					if($this->group_model->get_member_count($data2['groupUuid']) < 8) {
+						//then join the member
+						$data2['active'] = 1;
+						$data2['dateJoined'] = date('Y-m-d H:i:s');
+		
+						$count = $this->group_model->is_member_of_group($data2);
+						
+						if($count == 0) {
+							$data['newGroup'] = $this->group_model->add_member($data2);
+							$this->group_model->increase_member_count($data2);
+						}
+					}
+				}
+				
+				//add post
 				$postUuid = $this->post_model->add_post($updateData);
 			}
 		}

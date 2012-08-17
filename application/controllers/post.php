@@ -53,14 +53,14 @@ class Post extends CI_Controller
 			//but it seems appfog doesn't support cron jobs
 			//i need to look into ironworker to see if that will serve the need
 			
-			$footer = "\n\n----------------\n";
-			$footer .= "Did you know that if you reply to this email, your reply will be automagically posted to the group?  It's true.\n\n";
-			$footer .= "Want to see the rest of the conversation?  Drop in on it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "\n\n";
+			$footer = "<br><br>\n\n----------------<br>\n";
+			$footer .= "Did you know that if you reply to this email, your reply will be automagically posted to the group?  It's true.<br><br>\n\n";
+			$footer .= "Want to see the rest of the conversation?  Drop in on it here: http://www.jabberlap.com/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "<br><br>\n\n";
 			
-			$footer .= "Don't want to receive email notifications when someone posts to a group?  Toggle the setting at: http://talk.aws.af.cm/user";
+			$footer .= "Don't want to receive email notifications when someone posts to a group?  Toggle the setting at: http://www.jabberlap.com/user";
 			
 			$author =  $this->users->get_user_by_id($userId, 1);
-			$subject = $author->username . " has a new Cheep message for you!";
+			$subject = $author->username . " has a new Jabberlap message for you!";
 			
 			$members = $this->group_model->get_members($updateData['groupUuid']);
 			foreach($members as $member) {
@@ -70,11 +70,11 @@ class Post extends CI_Controller
 					if(!empty($prefs) && $prefs[0]->email_notif == 1) {
 						//$emailPost = $author . " said:\n" . $post . $footer;
 						$group = $this->group_model->get_group_info($updateData['groupUuid']);
-						$emailPost = $author->username . " has posted to " . $group->groupName . ":";
-						$emailPost .= "\n" . $post;
-						$emailPost .= "\n\nView it here: http://talk.aws.af.cm/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "\n\n";
+						$emailPost = $author->username . " has jabbed to \"" . $group->groupName . "\":";
+						$emailPost .= "<br>\n" . $post;
+						//$emailPost .= "<br><br>\n\nView it here: http://www.jabberlap.com/group/" . $updateData['groupUuid'] . "#" . $updateData['postUuid'] . "<br><br>\n\n";
 						$emailPost .= $footer;
-						$sendAddress = "cheep+" . $updateData['groupUuid'] . "@talktrippp.mailgun.org";
+						$sendAddress = "Jabberlap Message <jabberlap+" . $updateData['groupUuid'] . "@jabberlap.mailgun.org>";
 						
 						$this->mail->sendMail($member->email, $sendAddress, $subject, $emailPost);
 					}

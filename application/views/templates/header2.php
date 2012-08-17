@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title><?if (!isset($pageTitle)){ echo "Cheep";}
+		<title><?if (!isset($pageTitle)){ echo "Jabberlap";}
 		   else {echo $pageTitle;}?></title>
 		<!-- http://ogp.me/ -->
-		<meta property="og:title" content="<?if (!isset($pageTitle)){ echo "Cheep";}
+		<meta property="og:title" content="<?if (!isset($pageTitle)){ echo "Jabberlap";}
 		   else {echo $pageTitle;}?>">
 		<!--<? if (isset($listPage)) { ?>
 		<meta property="og:description" content="<? print_r($lists[0]->share); ?>">
@@ -57,7 +57,7 @@
 						<span class="icon-bar"></span>
 					</a>
 					<!-- Be sure to leave the brand out there if you want it shown -->
-					<a class="brand" href="/">Cheep</a>
+					<a class="brand" href="/">Jabberlap</a>
 					<?
 					if (isset($group->groupName)) {
 						echo "<span class=\"brand\"> : " . $group->groupName . "</span>";
@@ -91,7 +91,7 @@
 							<!--<? if (isset($user->email) && $user->email != "") { ?>
 								<li><a href="/user" id="loggedInUser"><? echo $user->username; ?></a></li>
 							<? } ?>-->
-							<li><a href="/user" id="loggedInUser" title="Prefs"><img src="/assets/img/gear.png" alt="Prefs"></a></li>
+							<? if($this->tank_auth->is_logged_in()) { ?><li><a href="/user" id="loggedInUser" title="Prefs"><img src="/assets/img/gear.png" alt="Prefs"></a></li><? } ?>
 							<!--<li><a href="http://blog.rightblank.com">Blog</a></li>
 							<li><a data-toggle="modal" href="#feedbackModal" >Feedback</a></li>-->
 							<? if (isset($user->email) && $user->email != "") { ?>

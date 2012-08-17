@@ -111,13 +111,21 @@ class Group_model extends CI_Model {
 
 
 	public function is_member_of_group($data) {
-		$this->db->select("*");
+		$this->db->select("count(userId) as count");
 		$this->db->from("member");
 		$this->db->where("userId", $data['userId']);
 		$this->db->where("groupUuid", $data['groupUuid']);
 	
-		//$query = $this->db->get();		
-		return ($this->db->count_all_results());
+		$query = $this->db->get();		
+		//error_log($this->db->last_query());
+		$count = $query->row_array();
+		
+		if (isset($count['count'])) {
+			return 	$count['count'];
+		}
+		else {
+			return 0;
+		}
 	}
 
 

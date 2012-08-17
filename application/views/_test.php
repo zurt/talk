@@ -1,5 +1,5 @@
 <form action="/api/message" method="post">
-	<input type="hidden" name="recipient" value="<? echo 'cheep+123456@16ths.com' ?>">
+	<input type="hidden" name="recipient" value="<? echo 'jabberlap+5029407035d87@jabberlap.com' ?>">
 	<input type="hidden" name="sender" value="<? echo 'trippp@gmail.com' ?>">
 	<input type="hidden" name="from" value="<? echo 'trippp@gmail.com' ?>">
 	<input type="hidden" name="subject" value="<? echo 'testing' ?>">

@@ -43,7 +43,12 @@ class Post_model extends CI_Model {
 		
 		$postUuid = $query->row_array();
 		error_log($this->db->last_query());
-		return 	$postUuid['postUuid'];	
+		if (isset($postUuid['postUuid'])) {
+			return 	$postUuid['postUuid'];
+		}
+		else {
+			return "";
+		}
 	}
 	
 	/*

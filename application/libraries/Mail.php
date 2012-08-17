@@ -32,7 +32,7 @@ class Mail {
 		
 		$ch = curl_init("https://api.mailgun.net/v2/talktrippp.mailgun.org/messages");
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, array('from'=>$from, 'to'=>$to, 'subject'=>$subject, 'text'=>$post));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, array('from'=>$from, 'to'=>$to, 'subject'=>$subject, 'html'=>$post, 'text'=>$post));
 		curl_setopt($ch, CURLOPT_USERPWD, "api:key-24sviiqk3e4xkty-ce-70h5p2qorpe72");
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 		//curl_setopt($ch, CURLOPT_MUTE, 1);

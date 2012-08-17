@@ -30,6 +30,7 @@ class Group extends CI_Controller
 
 		$this->load->model('group_model');
 		$this->load->model('post_model');
+		$this->load->model('post_attachments_model');
 		$this->load->model('member_model');
 
 		$this->load->helper('url');
@@ -37,6 +38,7 @@ class Group extends CI_Controller
 		$this->load->helper('strip_html_tags');
 		
 		$this->load->library('form_validation');
+		$this->load->library('s3');
 		
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
@@ -130,9 +132,19 @@ class Group extends CI_Controller
 				}
 				
 				$data['posts'] = $posts;
+				
+				$s3 = new S3($this->config->item('awsAccessKey'),  $this->config->item('awsSecretKey'));
+				
 				foreach($data['posts'] as $post) {
 					$post->image = $this->gravatar->buildGravatarURL($post->email);
 					$post->dateCreated = relative_time($post->dateCreated);
+					
+					//check if we have images
+					$uriResults = $this->post_attachments_model->get_uri($post->postUuid);
+					foreach($uriResults as $uri) {
+						$url = $this->s3->getAuthenticatedURL('jabberlap', $uri->uri, 120);
+						$post->content .= "<br><br>\n\n" . "<img src=\"" . $url . "\">";
+					}
 				}
 
 				//get members in group

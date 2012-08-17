@@ -16,6 +16,7 @@ class Temp extends CI_Controller
 		$this->load->helper('strip_html_tags');
 		
 		$this->load->library('form_validation');
+		$this->load->library('s3');
 		
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
@@ -24,6 +25,48 @@ class Temp extends CI_Controller
 		$this->load->library('gravatar');
 		$this->load->library('encrypter');
 	}
+
+	function s3() {
+		$bucketName = "jabberlap";
+		$uploadFile = "./2061-by-dan-mcpharlin.jpeg";
+
+		// Instantiate the class
+		$s3 = new S3($this->config->item('awsAccessKey'),  $this->config->item('awsSecretKey'));
+
+		// List your buckets:
+		echo "S3::listBuckets(): ".print_r($s3->listBuckets(), 1)."\n";
+		
+		// Create a bucket with public read access
+		if ($s3->putBucket($bucketName, S3::ACL_PUBLIC_READ)) {
+			echo "Created bucket {$bucketName}".PHP_EOL;
+
+			// Put our file (also with public read access)
+			if ($s3->putObjectFile($uploadFile, $bucketName, "barf/" . baseName($uploadFile), S3::ACL_PUBLIC_READ)) {
+				echo "S3::putObjectFile(): File copied to {$bucketName}/barf/".baseName($uploadFile).PHP_EOL;
+
+				// Get the contents of our bucket
+				$contents = $s3->getBucket($bucketName);
+				echo "S3::getBucket(): Files in bucket {$bucketName}: ".print_r($contents, 1);
+
+				// Get object info
+				$info = $s3->getObjectInfo($bucketName, baseName($uploadFile));
+				echo "S3::getObjectInfo(): Info for {$bucketName}/".baseName($uploadFile).': '.print_r($info, 1);
+			}
+		}
+	}
+	
+	public function s32() {
+		$bucketName = "jabberlap";
+		$referenceFile = "50204ea977927/Anne+Hathaway.jpeg";
+		
+		
+		// Instantiate the class
+		$s3 = new S3($this->config->item('awsAccessKey'),  $this->config->item('awsSecretKey'));
+		
+		$url = $this->s3->getAuthenticatedURL($bucketName, $referenceFile, 5000);
+		echo "<img src=\"$url\">";
+	}
+
 
 	function index() {
 		if (@isset($_GET['source'])) 
