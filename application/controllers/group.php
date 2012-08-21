@@ -79,7 +79,7 @@ class Group extends CI_Controller
 			}
 		}
 		
-		$message = "Group created.  Share the invitation code with others so they can join in on the conversation!";
+		$message = "Group created.  Share the invitation code or email address with others so they can join in on the conversation!";
 		$this->session->set_flashdata('message', $message);
 		redirect('/');
 	}

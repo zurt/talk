@@ -22,8 +22,8 @@
 		}
 		echo ") ";
 		*/
-		echo "(Invite code: " . $group->inviteUuid;
-		echo " )<br>";
+		echo "Email address: <a href=\"mailto:jabberlap+" . $group->groupUuid . "@jabberlap.com\">jabberlap+" . $group->groupUuid . "@jabberlap.com</a><br>Invite code: " . $group->inviteUuid;
+		echo " <br>";
 		foreach($group->members as $member) {
 			echo "<img src=\"" . $member->image . "\" title=\"" . $member->username . "\"> ";
 		}

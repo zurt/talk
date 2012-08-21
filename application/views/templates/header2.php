@@ -57,7 +57,7 @@
 						<span class="icon-bar"></span>
 					</a>
 					<!-- Be sure to leave the brand out there if you want it shown -->
-					<a class="brand" href="/">Jabberlap</a>
+					<a class="brand" href="http://www.jabberlap.com/">Jabberlap</a>
 					<?
 					if (isset($group->groupName)) {
 						echo "<span class=\"brand\"> : " . $group->groupName . "</span>";
@@ -77,7 +77,7 @@
 								<ul class="dropdown-menu">
 									<? foreach($groups as $group) { ?>
 									<li>
-										<a href="/group/<? echo $group->groupUuid; ?>"><? echo $group->groupName; ?>
+										<a href="http://www.jabberlap.com/group/<? echo $group->groupUuid; ?>"><? echo $group->groupName; ?>
 										<?if ($group->unseenPostCount > 0) {
 											echo "(" . 	$group->unseenPostCount . " new)";
 										} ?>
@@ -87,17 +87,17 @@
 								</ul>
 							</li>
 							<? } ?>
-							<li><a href="/about">About</a></li>
+							<li><a href="http://www.jabberlap.com/about">About</a></li>
 							<!--<? if (isset($user->email) && $user->email != "") { ?>
 								<li><a href="/user" id="loggedInUser"><? echo $user->username; ?></a></li>
 							<? } ?>-->
-							<? if($this->tank_auth->is_logged_in()) { ?><li><a href="/user" id="loggedInUser" title="Prefs"><img src="/assets/img/gear.png" alt="Prefs"></a></li><? } ?>
+							<? if($this->tank_auth->is_logged_in()) { ?><li><a href="http://www.jabberlap.com/user" id="loggedInUser" title="Prefs"><img src="/assets/img/gear.png" alt="Prefs"></a></li><? } ?>
 							<!--<li><a href="http://blog.rightblank.com">Blog</a></li>
 							<li><a data-toggle="modal" href="#feedbackModal" >Feedback</a></li>-->
 							<? if (isset($user->email) && $user->email != "") { ?>
-								<li><a href="/auth/logout">Log out</a></li>
+								<li><a href="http://www.jabberlap.com/auth/logout">Log out</a></li>
 							<? } else { ?>
-								<li><a href="/auth/login">Log in</a></li>
+								<li><a href="http://www.jabberlap.com/auth/login">Log in</a></li>
 							<? } ?>
 							<!--<? if(isset($user) && $user->group == 1) { ?>
 								<li><a href="/admin/">Admin</a></li>

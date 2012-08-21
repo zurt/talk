@@ -14,8 +14,10 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
-
+if (ENVIRONMENT != "production")
+	$config['base_url']	= '';
+else
+	$config['base_url']	= 'http://www.jabberlap.com';
 /*
 |--------------------------------------------------------------------------
 | Index File
